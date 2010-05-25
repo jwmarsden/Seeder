@@ -1,0 +1,16 @@
+/.settings
+/target/
+/web-app/WEB-INF/classes/
+
+devDB.properties
+devDB.log
+devDB.script
+stacktrace.log
+
+seeder.git.iml
+seeder.git.ipr
+seeder.git.iws
+seeder.git-grailsPlugins.iml
+
+/out
+*~
