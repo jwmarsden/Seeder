@@ -2,9 +2,13 @@
 /target/
 /web-app/WEB-INF/classes/
 
-devDB.properties
-devDB.log
-devDB.script
+devDb.properties
+devDb.log
+devDb.script
+testDb.properties
+testDb.log
+testDb.script
+
 stacktrace.log
 
 seeder.git.iml
