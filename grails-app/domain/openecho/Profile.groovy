@@ -2,9 +2,9 @@ package openecho
 
 class Profile {
 
-  static hasMany = [ users : User ] //, followerProfiles : FollowProfile, profilesFollowing : FollowProfile, seeds : Seed ]
-//  static mappedBy = [ followerProfiles : "following", profilesFollowing : "follower"]
-//  static fetchMode = [ followerProfiles : "eager", profilesFollowing : "eager"]
+  static hasMany = [ users : User, followerProfiles : FollowProfile, profilesFollowing : FollowProfile ]
+  static mappedBy = [ followerProfiles : "following", profilesFollowing : "follower"]
+  static fetchMode = [ followerProfiles : "eager", profilesFollowing : "eager"]
 
   String identity
   String firstName
@@ -40,5 +40,4 @@ class Profile {
   String toString() {
     "Profile for ${identity} (${id})"
   }
-
 }
