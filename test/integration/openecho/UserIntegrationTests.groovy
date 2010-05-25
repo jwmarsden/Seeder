@@ -11,7 +11,11 @@ class UserIntegrationTests extends GrailsUnitTestCase {
         super.tearDown()
     }
 
-    void testSomething() {
-
-    }
+  void testCreateNewUser() {
+    def user = new User(userName: 'jwm', newPassword: 'mwjwm', type: "LOCAL", email: 'jwm@gmail.com')
+    assertNotNull(user.save())
+    assertNotNull(user.id)
+    def foundUser = User.get(user.id)
+    assertEquals 'jwm', foundUser.userName
+  }
 }
