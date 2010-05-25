@@ -3,8 +3,8 @@ package openecho
 class Profile {
 
   static hasMany = [ users : User, followerProfiles : FollowProfile, profilesFollowing : FollowProfile ]
-  static mappedBy = [ followerProfiles : "following", profilesFollowing : "follower"]
-  static fetchMode = [ followerProfiles : "eager", profilesFollowing : "eager"]
+  static mappedBy = [ followerProfiles : "follower", profilesFollowing : "following"]
+  static fetchMode = [ followerProfiles : "eager", profilesFollowing : "eager" ]
 
   String identity
   String firstName
