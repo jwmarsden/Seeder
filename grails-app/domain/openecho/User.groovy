@@ -3,8 +3,8 @@ package openecho
 class User {
   static transients = [ "newPassword" ]
 
-//  static hasMany = [ profiles : Profile ]
-//  static belongsTo = Profile
+  static hasMany = [ profiles : Profile ]
+  static belongsTo = Profile
 
   String userName
   String password
@@ -31,8 +31,4 @@ class User {
   String toString() {
     "User for ${userName} (${id})"
   }
-
-//  static mapping = {
-//    profiles column:'Profile_User_Id'
-//  }
 }
