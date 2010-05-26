@@ -20,7 +20,7 @@ class ProfileRelationship {
   }
 
   String toString() {
-    "${source.identity} -${type}- ${target.identity} (${id})"
+    "${source.identity} -${type}-> ${target.identity} (${id})"
   }
 
   static ProfileRelationship relate(source, target, type) {
