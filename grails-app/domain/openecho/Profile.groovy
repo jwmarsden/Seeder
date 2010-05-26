@@ -46,4 +46,14 @@ class Profile {
     addToProfilesFollowing(followRelationship)
     followRelationship
   }
+
+  void ignoreProfile(Profile profile) {
+    for (followRelationship in profilesFollowing) {
+      if(followRelationship.following == profile) {
+        removeFromProfilesFollowing(followRelationship)
+        followRelationship.delete(flush: true)
+        break
+      }
+    }
+  }
 }
