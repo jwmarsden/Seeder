@@ -49,12 +49,12 @@ class Profile {
   }
 
   List addToFollowing(Profile profile) {
-    ProfileRelationship.relate(this, profile)
+    ProfileRelationship.relate(this, profile, ProfileRelationship.Type.FOLLOW)
     following()
   }
 
   List removeFromFollowing(Profile profile) {
-    ProfileRelationship.unRelate(this, profile)
+    ProfileRelationship.unRelate(this, profile, ProfileRelationship.Type.FOLLOW)
     following()
   }
 }

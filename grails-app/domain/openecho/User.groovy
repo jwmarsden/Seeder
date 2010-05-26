@@ -10,6 +10,7 @@ class User {
   String password
   String type
   String email
+  boolean active = true
   Date dateCreated
   Date lastUpdated
 
@@ -18,6 +19,7 @@ class User {
     password(nullable: false)
     type(nullable: false, inList:["LOCAL","OPEN_ID"])
     email(email: true, nullable: true)
+    active(nullable: false)
   }
 
   void setNewPassword(String newPassword) {

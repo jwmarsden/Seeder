@@ -65,7 +65,7 @@ class ProfileIntegrationTests extends GrailsUnitTestCase {
     println "= profile2 created {$profile2.id}"
 
     println "= creating follow1"
-    def follow1 = new ProfileRelationship(source: profile1, target: profile2);
+    def follow1 = new ProfileRelationship(source: profile1, target: profile2, type: ProfileRelationship.Type.FOLLOW);
     assertNotNull(follow1.save(flush:true))
     println "= follow1 created {$follow1.id}"
 
