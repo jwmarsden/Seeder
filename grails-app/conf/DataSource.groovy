@@ -1,5 +1,5 @@
 dataSource {
-  logSql = true
+  logSql = false
   pooled = true
   driverClassName = "org.hsqldb.jdbcDriver"
   username = "sa"
