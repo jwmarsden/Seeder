@@ -17,7 +17,6 @@ class ProfileRelationship {
 
   static ProfileRelationship relate(source, target) {
     def pr = ProfileRelationship.findBySourceAndTarget(source, target)
-    println "Here"
     if (!pr)
     {
       pr = new ProfileRelationship(source: source, target: target)
