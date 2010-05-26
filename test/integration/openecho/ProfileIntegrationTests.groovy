@@ -65,115 +65,59 @@ class ProfileIntegrationTests extends GrailsUnitTestCase {
     println "= profile2 created {$profile2.id}"
 
     println "= creating follow1"
-    def follow1 = new FollowProfile(follower: profile1, following: profile2);
+    def follow1 = new ProfileRelationship(source: profile1, target: profile2);
     assertNotNull(follow1.save(flush:true))
     println "= follow1 created {$follow1.id}"
 
     profile1.refresh()
     profile2.refresh()
-    println "= Profiles Refreshed."
-    println "= {$profile1.profilesFollowing} {$profile1.followerProfiles}"
 
-    def foundProfile1 = Profile.get(profile1.id)
-    assertEquals 'openecho', foundProfile1.identity
-
-    def foundProfile2 = Profile.get(profile2.id)
-    assertEquals 'seeder org', foundProfile2.identity
-
-    assertEquals(1, profile1.profilesFollowing.size())
-    assertEquals(0, profile1.followerProfiles.size())
-    assertEquals(0, profile2.profilesFollowing.size())
-    assertEquals(1, profile2.followerProfiles.size())
+    assertEquals(1, profile1.following().size())
+    assertEquals(0, profile2.following().size())
+    assertEquals(0, profile1.followedBy().size())
+    assertEquals(1, profile2.followedBy().size())
   }
 
-  void testFollowProfileInjectionVariable() {
+  void testAddToFollowing() {
     println "= profile1 follow profile2"
     def profile1 = new Profile(identity: "openecho")
     assertNotNull(profile1.save(flush: true))
     def profile2 = new Profile(identity: "seeder org")
     assertNotNull(profile2.save(flush: true))
-    profile1.addToProfilesFollowing(follower: profile1, following: profile2)
+
+    profile1.addToFollowing(profile2)
     assertNotNull(profile1.save(flush: true))
     profile1.refresh()
     profile2.refresh()
-    println "= profile1: \n\tFollowing {$profile1.profilesFollowing} Followers: {$profile1.followerProfiles}"
-    println "= profile2: \n\tFollowing {$profile2.profilesFollowing} Followers: {$profile2.followerProfiles}"
-    assertEquals(1, profile1.profilesFollowing.size())
-    assertEquals(0, profile1.followerProfiles.size())
-    assertEquals(0, profile2.profilesFollowing.size())
-    assertEquals(1, profile2.followerProfiles.size())
-    println "= profile2 follow profile1"
-    profile2.addToProfilesFollowing(follower: profile2, following: profile1)
-    assertNotNull(profile2.save(flush: true))
-    profile1.refresh()
-    profile2.refresh()
-    println "= profile1: \n\tFollowing {$profile1.profilesFollowing} Followers: {$profile1.followerProfiles}"
-    println "= profile2: \n\tFollowing {$profile2.profilesFollowing} Followers: {$profile2.followerProfiles}"
-    assertEquals(1, profile1.profilesFollowing.size())
-    assertEquals(1, profile1.followerProfiles.size())
-    assertEquals(1, profile2.profilesFollowing.size())
-    assertEquals(1, profile2.followerProfiles.size())
-    println "= profile3 followed by profile2"
-    def profile3 = new Profile(identity: "sammy")
-    profile3.addToFollowerProfiles(follower: profile2, following: profile3)
-    assertNotNull(profile3.save(flush: true))
-    profile1.refresh()
-    profile2.refresh()
-    profile3.refresh()
-    println "= profile1: \n\tFollowing {$profile1.profilesFollowing} Followers: {$profile1.followerProfiles}"
-    println "= profile2: \n\tFollowing {$profile2.profilesFollowing} Followers: {$profile2.followerProfiles}"
-    println "= profile3: \n\tFollowing {$profile3.profilesFollowing} Followers: {$profile3.followerProfiles}"
-    assertEquals(1, profile1.profilesFollowing.size())
-    assertEquals(1, profile1.followerProfiles.size())
-    assertEquals(2, profile2.profilesFollowing.size())
-    assertEquals(1, profile2.followerProfiles.size())
-    assertEquals(0, profile3.profilesFollowing.size())
-    assertEquals(1, profile3.followerProfiles.size())
+    assertEquals(1, profile1.following().size())
+    assertEquals(0, profile1.followedBy().size())
+    assertEquals(0, profile2.following().size())
+    assertEquals(1, profile2.followedBy().size())
   }
+  
 
-  void testFollowProfile() {
-    println "= profile1 follow profile2"
+  void testRemoveFromFollowing() {
     def profile1 = new Profile(identity: "openecho")
     assertNotNull(profile1.save(flush: true))
     def profile2 = new Profile(identity: "seeder org")
     assertNotNull(profile2.save(flush: true))
-    profile1.followProfile(profile2)
-    assertNotNull(profile1.save(flush: true))
-    profile1.refresh()
-    profile2.refresh()
-    println "= profile1: \n\tFollowing {$profile1.profilesFollowing} Followers: {$profile1.followerProfiles}"
-    println "= profile2: \n\tFollowing {$profile2.profilesFollowing} Followers: {$profile2.followerProfiles}"
-    assertEquals(1, profile1.profilesFollowing.size())
-    assertEquals(0, profile1.followerProfiles.size())
-    assertEquals(0, profile2.profilesFollowing.size())
-    assertEquals(1, profile2.followerProfiles.size())
-  }
 
-  void testIgnoreProfile() {
-    println "= profile1 follow profile2"
-    def profile1 = new Profile(identity: "openecho")
-    assertNotNull(profile1.save(flush: true))
-    def profile2 = new Profile(identity: "seeder org")
-    assertNotNull(profile2.save(flush: true))
-    profile1.followProfile(profile2)
+    profile1.addToFollowing(profile2)
     assertNotNull(profile1.save(flush: true))
     profile1.refresh()
     profile2.refresh()
-    println "= profile1: \n\tFollowing {$profile1.profilesFollowing} Followers: {$profile1.followerProfiles}"
-    println "= profile2: \n\tFollowing {$profile2.profilesFollowing} Followers: {$profile2.followerProfiles}"
-    assertEquals(1, profile1.profilesFollowing.size())
-    assertEquals(0, profile1.followerProfiles.size())
-    assertEquals(0, profile2.profilesFollowing.size())
-    assertEquals(1, profile2.followerProfiles.size())
-    profile1.ignoreProfile(profile2)
+    assertEquals(1, profile1.following().size())
+    assertEquals(0, profile1.followedBy().size())
+    assertEquals(0, profile2.following().size())
+    assertEquals(1, profile2.followedBy().size())
+
+    profile1.removeFromFollowing(profile2)
     assertNotNull(profile1.save(flush: true))
     profile1.refresh()
     profile2.refresh()
-    println "= profile1: \n\tFollowing {$profile1.profilesFollowing} Followers: {$profile1.followerProfiles}"
-    println "= profile2: \n\tFollowing {$profile2.profilesFollowing} Followers: {$profile2.followerProfiles}"
-    assertEquals(0, profile1.profilesFollowing.size())
-    assertEquals(0, profile1.followerProfiles.size())
-    assertEquals(0, profile2.profilesFollowing.size())
-    assertEquals(0, profile2.followerProfiles.size())
+    assertEquals(0, profile1.following().size())
+    assertEquals(0, profile1.followedBy().size())
+    assertEquals(0, profile2.following().size())
+    assertEquals(0, profile2.followedBy().size())
   }
 }

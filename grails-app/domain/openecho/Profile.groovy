@@ -2,9 +2,8 @@ package openecho
 
 class Profile {
 
-  static hasMany = [ users : User, followerProfiles : FollowProfile, profilesFollowing : FollowProfile ]
-  static mappedBy = [ followerProfiles : "following", profilesFollowing : "follower"]
-  static fetchMode = [ followerProfiles : "eager", profilesFollowing : "eager" ]
+  static hasMany = [ users : User, profilesFollowing : ProfileRelationship, followerProfiles : ProfileRelationship ]
+  static mappedBy = [ profilesFollowing : "source", followerProfiles : "target"]
 
   String identity
   String firstName
@@ -41,19 +40,21 @@ class Profile {
     "Profile for ${identity} (${id})"
   }
 
-  FollowProfile followProfile(Profile profile) {
-    FollowProfile followRelationship = new FollowProfile(follower: this, following: profile)
-    addToProfilesFollowing(followRelationship)
-    followRelationship
+  List followedBy() {
+    followerProfiles.collect{it.source}
   }
 
-  void ignoreProfile(Profile profile) {
-    for (followRelationship in profilesFollowing) {
-      if(followRelationship.following == profile) {
-        removeFromProfilesFollowing(followRelationship)
-        followRelationship.delete(flush: true)
-        break
-      }
-    }
+  List following() {
+    profilesFollowing.collect{it.target}
+  }
+
+  List addToFollowing(Profile profile) {
+    ProfileRelationship.relate(this, profile)
+    following()
+  }
+
+  List removeFromFollowing(Profile profile) {
+    ProfileRelationship.unRelate(this, profile)
+    following()
   }
 }
