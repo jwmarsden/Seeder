@@ -94,7 +94,7 @@ class ProfileIntegrationTests extends GrailsUnitTestCase {
     assertEquals(0, profile2.following().size())
     assertEquals(1, profile2.followedBy().size())
   }
-  
+
 
   void testRemoveFromFollowing() {
     def profile1 = new Profile(identity: "openecho")
@@ -119,5 +119,47 @@ class ProfileIntegrationTests extends GrailsUnitTestCase {
     assertEquals(0, profile1.followedBy().size())
     assertEquals(0, profile2.following().size())
     assertEquals(0, profile2.followedBy().size())
+  }
+
+  void testAddToBlocking() {
+    println "= profile1 block profile2"
+    def profile1 = new Profile(identity: "openecho")
+    assertNotNull(profile1.save(flush: true))
+    def profile2 = new Profile(identity: "seeder org")
+    assertNotNull(profile2.save(flush: true))
+
+    profile1.addToBlocking(profile2)
+    assertNotNull(profile1.save(flush: true))
+    profile1.refresh()
+    profile2.refresh()
+    assertEquals(1, profile1.blocked().size())
+    assertEquals(0, profile1.blockedBy().size())
+    assertEquals(0, profile2.blocked().size())
+    assertEquals(1, profile2.blockedBy().size())
+  }
+
+  void testRemoveFromBlocking() {
+    def profile1 = new Profile(identity: "openecho")
+    assertNotNull(profile1.save(flush: true))
+    def profile2 = new Profile(identity: "seeder org")
+    assertNotNull(profile2.save(flush: true))
+
+    profile1.addToBlocking(profile2)
+    assertNotNull(profile1.save(flush: true))
+    profile1.refresh()
+    profile2.refresh()
+    assertEquals(1, profile1.blocked().size())
+    assertEquals(0, profile1.blockedBy().size())
+    assertEquals(0, profile2.blocked().size())
+    assertEquals(1, profile2.blockedBy().size())
+
+    profile1.removeFromBlocking(profile2)
+    assertNotNull(profile1.save(flush: true))
+    profile1.refresh()
+    profile2.refresh()
+    assertEquals(0, profile1.blocked().size())
+    assertEquals(0, profile1.blockedBy().size())
+    assertEquals(0, profile2.blocked().size())
+    assertEquals(0, profile2.blockedBy().size())
   }
 }

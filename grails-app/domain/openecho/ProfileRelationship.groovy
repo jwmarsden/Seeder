@@ -3,7 +3,7 @@ package openecho
 class ProfileRelationship {
 
   enum Type {
-    FOLLOW, FRIEND, BLOCKED
+    FOLLOW, BLOCKED, FRIEND
   }
 
   Profile source
@@ -31,6 +31,11 @@ class ProfileRelationship {
       if(type == Type.FOLLOW) {
         source?.addToProfilesFollowing(pr)
         target?.addToFollowerProfiles(pr)
+      } else if(type == Type.BLOCKED) {
+        source?.addToProfilesBlocked(pr)
+        target?.addToBlockedByProfiles(pr)
+      } else if(type == Type.FRIEND) {
+
       }
       pr.save()
     }
@@ -44,6 +49,11 @@ class ProfileRelationship {
       if(type == Type.FOLLOW) {
         source?.removeFromProfilesFollowing(pr)
         target?.removeFromFollowerProfiles(pr)
+      } else if(type == Type.BLOCKED) {
+        source?.removeFromProfilesBlocked(pr)
+        target?.removeFromBlockedByProfiles(pr)
+      } else if(type == Type.FRIEND) {
+
       }
       pr.delete()
     }

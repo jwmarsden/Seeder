@@ -2,8 +2,19 @@ package openecho
 
 class Profile {
 
-  static hasMany = [ users : User, profilesFollowing : ProfileRelationship, followerProfiles : ProfileRelationship ]
-  static mappedBy = [ profilesFollowing : "source", followerProfiles : "target"]
+  static hasMany = [
+          users : User,
+          profilesFollowing : ProfileRelationship,
+          followerProfiles : ProfileRelationship,
+          profilesBlocked: ProfileRelationship,
+          blockedByProfiles: ProfileRelationship
+  ]
+  static mappedBy = [ 
+          profilesFollowing : "source",
+          followerProfiles : "target",
+          profilesBlocked: "source",
+          blockedByProfiles: "target"
+  ]
 
   String identity
   String firstName
@@ -56,5 +67,23 @@ class Profile {
   List removeFromFollowing(Profile profile) {
     ProfileRelationship.unRelate(this, profile, ProfileRelationship.Type.FOLLOW)
     following()
+  }
+
+  List blocked() {
+    profilesBlocked.collect{it.source}
+  }
+
+  List blockedBy() {
+    blockedByProfiles.collect{it.target}
+  }
+
+  List addToBlocking(Profile profile) {
+    ProfileRelationship.relate(this, profile, ProfileRelationship.Type.BLOCKED)
+    blocked()
+  }
+
+  List removeFromBlocking(Profile profile) {
+    ProfileRelationship.unRelate(this, profile, ProfileRelationship.Type.BLOCKED)
+    blockedBy()
   }
 }
