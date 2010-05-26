@@ -130,4 +130,22 @@ class ProfileIntegrationTests extends GrailsUnitTestCase {
     assertEquals(0, profile3.profilesFollowing.size())
     assertEquals(1, profile3.followerProfiles.size())
   }
+
+  void testFollowProfile() {
+    println "= profile1 follow profile2"
+    def profile1 = new Profile(identity: "openecho")
+    assertNotNull(profile1.save(flush: true))
+    def profile2 = new Profile(identity: "seeder org")
+    assertNotNull(profile2.save(flush: true))
+    profile1.followProfile(profile2)
+    assertNotNull(profile1.save(flush: true))
+    profile1.refresh()
+    profile2.refresh()
+    println "= profile1: \n\tFollowing {$profile1.profilesFollowing} Followers: {$profile1.followerProfiles}"
+    println "= profile2: \n\tFollowing {$profile2.profilesFollowing} Followers: {$profile2.followerProfiles}"
+    assertEquals(1, profile1.profilesFollowing.size())
+    assertEquals(0, profile1.followerProfiles.size())
+    assertEquals(0, profile2.profilesFollowing.size())
+    assertEquals(1, profile2.followerProfiles.size())
+  }
 }

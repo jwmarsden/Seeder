@@ -40,4 +40,10 @@ class Profile {
   String toString() {
     "Profile for ${identity} (${id})"
   }
+
+  FollowProfile followProfile(Profile profile) {
+    FollowProfile followRelationship = new FollowProfile(follower: this, following: profile)
+    addToProfilesFollowing(followRelationship)
+    followRelationship
+  }
 }
