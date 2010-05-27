@@ -7,9 +7,9 @@ class Profile {
           profilesFollowing : ProfileRelationship,
           followerProfiles : ProfileRelationship,
           profilesBlocked: ProfileRelationship,
-          blockedByProfiles: ProfileRelationship
+          blockedByProfiles: ProfileRelationship,
   ]
-  static mappedBy = [ 
+  static mappedBy = [
           profilesFollowing : "source",
           followerProfiles : "target",
           profilesBlocked: "source",

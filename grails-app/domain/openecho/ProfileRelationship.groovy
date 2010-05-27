@@ -3,7 +3,7 @@ package openecho
 class ProfileRelationship {
 
   enum Type {
-    FOLLOW, BLOCKED, FRIEND
+    FOLLOW, BLOCKED
   }
 
   Profile source
@@ -24,7 +24,7 @@ class ProfileRelationship {
   }
 
   static ProfileRelationship relate(source, target, type) {
-    def pr = ProfileRelationship.findBySourceAndTarget(source, target, type)
+    def pr = ProfileRelationship.findBySourceAndTarget(source, target)
     if (!pr)
     {
       pr = new ProfileRelationship(source: source, target: target, type: type)
@@ -34,8 +34,6 @@ class ProfileRelationship {
       } else if(type == Type.BLOCKED) {
         source?.addToProfilesBlocked(pr)
         target?.addToBlockedByProfiles(pr)
-      } else if(type == Type.FRIEND) {
-
       }
       pr.save()
     }
@@ -43,7 +41,7 @@ class ProfileRelationship {
   }
 
   static void unRelate(source, target, type) {
-    def pr = ProfileRelationship.findBySourceAndTarget(source, target, type)
+    def pr = ProfileRelationship.findBySourceAndTarget(source, target)
     if (pr)
     {
       if(type == Type.FOLLOW) {
@@ -52,8 +50,6 @@ class ProfileRelationship {
       } else if(type == Type.BLOCKED) {
         source?.removeFromProfilesBlocked(pr)
         target?.removeFromBlockedByProfiles(pr)
-      } else if(type == Type.FRIEND) {
-
       }
       pr.delete()
     }
