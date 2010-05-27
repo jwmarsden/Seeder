@@ -3,7 +3,7 @@ package openecho
 class ProfileRelationship {
 
   enum Type {
-    FOLLOW, BLOCKED
+    FOLLOW, BLOCKED, FRIEND
   }
 
   Profile source
@@ -23,35 +23,40 @@ class ProfileRelationship {
     "${source.identity} -${type}-> ${target.identity} (${id})"
   }
 
-  static ProfileRelationship relate(source, target, type) {
-    def pr = ProfileRelationship.findBySourceAndTarget(source, target)
+  static ProfileRelationship relate(sourceInput, targetInput, typeInput) {
+    // TODO: This also needs to query by type.
+    def pr = ProfileRelationship.findBySourceAndTarget(sourceInput, targetInput)
     if (!pr)
     {
-      pr = new ProfileRelationship(source: source, target: target, type: type)
-      if(type == Type.FOLLOW) {
-        source?.addToProfilesFollowing(pr)
-        target?.addToFollowerProfiles(pr)
-      } else if(type == Type.BLOCKED) {
-        source?.addToProfilesBlocked(pr)
-        target?.addToBlockedByProfiles(pr)
+      pr = new ProfileRelationship(source: sourceInput, target: targetInput, type: typeInput)
+      if(typeInput == Type.FOLLOW) {
+        sourceInput?.addToProfilesFollowing(pr)
+        targetInput?.addToFollowerProfiles(pr)
+      } else if(typeInput == Type.BLOCKED) {
+        sourceInput?.addToProfilesBlocked(pr)
+        targetInput?.addToBlockedByProfiles(pr)
+      } else if (typeInput == Type.FRIEND) {
+        sourceInput?.addToProfilesFriended(pr)
       }
-      pr.save()
     }
     return pr
   }
 
-  static void unRelate(source, target, type) {
-    def pr = ProfileRelationship.findBySourceAndTarget(source, target)
+  static void unRelate(sourceInput, targetInput, typeInput) {
+    // TODO: This also needs to query by type.
+    def pr = ProfileRelationship.findBySourceAndTarget(sourceInput, targetInput)
     if (pr)
     {
-      if(type == Type.FOLLOW) {
-        source?.removeFromProfilesFollowing(pr)
-        target?.removeFromFollowerProfiles(pr)
-      } else if(type == Type.BLOCKED) {
-        source?.removeFromProfilesBlocked(pr)
-        target?.removeFromBlockedByProfiles(pr)
+      if(typeInput == Type.FOLLOW) {
+        sourceInput?.removeFromProfilesFollowing(pr)
+        targetInput?.removeFromFollowerProfiles(pr)
+      } else if(typeInput == Type.BLOCKED) {
+        sourceInput?.removeFromProfilesBlocked(pr)
+        targetInput?.removeFromBlockedByProfiles(pr)
+      } else if (typeInput == Type.FRIEND) {
+        sourceInput?.removeFromProfilesFriended(pr)
       }
-      pr.delete()
+      pr.delete(flush: true)
     }
   }
 }

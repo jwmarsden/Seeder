@@ -8,12 +8,16 @@ class Profile {
           followerProfiles : ProfileRelationship,
           profilesBlocked: ProfileRelationship,
           blockedByProfiles: ProfileRelationship,
+          profilesFriended: ProfileRelationship,
+//          friendByProfiles: ProfileRelationship
   ]
   static mappedBy = [
           profilesFollowing : "source",
           followerProfiles : "target",
           profilesBlocked: "source",
-          blockedByProfiles: "target"
+          blockedByProfiles: "target",
+          profilesFriended: "source",
+  //        friendByProfiles: "target"
   ]
 
   String identity
@@ -85,5 +89,21 @@ class Profile {
   List removeFromBlocking(Profile profile) {
     ProfileRelationship.unRelate(this, profile, ProfileRelationship.Type.BLOCKED)
     blockedBy()
+  }
+
+  List friends() {
+    profilesFriended.collect{it.source}
+  }
+
+  List addToFriends(Profile profile) {
+    ProfileRelationship.relate(this, profile, ProfileRelationship.Type.FRIEND)
+    ProfileRelationship.relate(profile, this, ProfileRelationship.Type.FRIEND)
+    friends()
+  }
+
+  List removeFromFriends(Profile profile) {
+    ProfileRelationship.unRelate(this, profile, ProfileRelationship.Type.FRIEND)
+    ProfileRelationship.unRelate(profile, this, ProfileRelationship.Type.FRIEND)
+    friends()
   }
 }
