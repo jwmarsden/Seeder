@@ -65,7 +65,7 @@ class ProfileIntegrationTests extends GrailsUnitTestCase {
     println "= profile2 created {$profile2.id}"
 
     println "= creating follow1"
-    def follow1 = new ProfileRelationship(source: profile1, target: profile2, type: ProfileRelationship.Type.FOLLOW);
+    def follow1 = new ProfileFollowRelationship(source: profile1, target: profile2);
     assertNotNull(follow1.save(flush:true))
     println "= follow1 created {$follow1.id}"
 
@@ -236,6 +236,11 @@ class ProfileIntegrationTests extends GrailsUnitTestCase {
     profile2.refresh()
     assertEquals(1, profile1.friends().size())
     assertEquals(1, profile2.friends().size())
+
+    profile1.addToBlocking(profile2)
+    assertNotNull(profile1.save(flush: true))
+    profile1.refresh()
+    profile2.refresh()
 
     profile1.removeFromFriends(profile2)
     assertNotNull(profile1.save(flush: true))

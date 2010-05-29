@@ -4,12 +4,11 @@ class Profile {
 
   static hasMany = [
           users : User,
-          profilesFollowing : ProfileRelationship,
-          followerProfiles : ProfileRelationship,
-          profilesBlocked: ProfileRelationship,
-          blockedByProfiles: ProfileRelationship,
-          profilesFriended: ProfileRelationship,
-//          friendByProfiles: ProfileRelationship
+          profilesFollowing : ProfileFollowRelationship,
+          followerProfiles : ProfileFollowRelationship,
+          profilesBlocked: ProfileBlockedRelationship,
+          blockedByProfiles: ProfileBlockedRelationship,
+          profilesFriended: ProfileFriendRelationship
   ]
   static mappedBy = [
           profilesFollowing : "source",
@@ -17,9 +16,8 @@ class Profile {
           profilesBlocked: "source",
           blockedByProfiles: "target",
           profilesFriended: "source",
-  //        friendByProfiles: "target"
   ]
-
+  
   String identity
   String firstName
   String lastName
@@ -64,12 +62,12 @@ class Profile {
   }
 
   List addToFollowing(Profile profile) {
-    ProfileRelationship.relate(this, profile, ProfileRelationship.Type.FOLLOW)
+    ProfileFollowRelationship.relate(this, profile)
     following()
   }
 
   List removeFromFollowing(Profile profile) {
-    ProfileRelationship.unRelate(this, profile, ProfileRelationship.Type.FOLLOW)
+    ProfileFollowRelationship.unRelate(this, profile)
     following()
   }
 
@@ -82,12 +80,12 @@ class Profile {
   }
 
   List addToBlocking(Profile profile) {
-    ProfileRelationship.relate(this, profile, ProfileRelationship.Type.BLOCKED)
+    ProfileBlockedRelationship.relate(this, profile)
     blocked()
   }
 
   List removeFromBlocking(Profile profile) {
-    ProfileRelationship.unRelate(this, profile, ProfileRelationship.Type.BLOCKED)
+    ProfileBlockedRelationship.unRelate(this, profile)
     blockedBy()
   }
 
@@ -96,14 +94,14 @@ class Profile {
   }
 
   List addToFriends(Profile profile) {
-    ProfileRelationship.relate(this, profile, ProfileRelationship.Type.FRIEND)
-    ProfileRelationship.relate(profile, this, ProfileRelationship.Type.FRIEND)
+    ProfileFriendRelationship.relate(this, profile)
+    ProfileFriendRelationship.relate(profile, this)
     friends()
   }
 
   List removeFromFriends(Profile profile) {
-    ProfileRelationship.unRelate(this, profile, ProfileRelationship.Type.FRIEND)
-    ProfileRelationship.unRelate(profile, this, ProfileRelationship.Type.FRIEND)
+    ProfileFriendRelationship.unRelate(this, profile)
+    ProfileFriendRelationship.unRelate(profile, this)
     friends()
   }
 }

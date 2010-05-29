@@ -19,10 +19,9 @@ class ProfileRelationshipTests extends GrailsUnitTestCase {
     assertNotNull(profile1.save())
     def profile2 = new Profile(identity: "seeder org")
     assertNotNull(profile2.save())
-    def follow1 = new ProfileRelationship()
+    def follow1 = new ProfileFriendRelationship()
     follow1.setSource(profile1)
     follow1.setTarget(profile2)
-    follow1.type = ProfileRelationship.Type.FOLLOW
     assertNotNull(follow1.save())
   }
 }
