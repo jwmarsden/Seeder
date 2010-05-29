@@ -59,7 +59,7 @@ input:focus, select:focus, textarea:focus {
 
 .body {
     float: left;
-    margin: 0 15px 10px 15px;
+/*    margin: 0 15px 10px 15px; */
 }
 
 /* NAVIGATION MENU */
