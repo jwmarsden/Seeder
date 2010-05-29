@@ -6,6 +6,10 @@ class User {
   static hasMany = [ profiles : Profile ]
   static belongsTo = Profile
 
+  static mapping = {
+    profiles lazy:false
+  }
+
   String userName
   String password
   String type

@@ -17,10 +17,14 @@ class Profile {
           blockedByProfiles: "target",
           profilesFriended: "source",
   ]
-  
+  static mapping = {
+    users lazy:false
+  }
+
   String identity
   String firstName
   String lastName
+  String name
   String displayName
   Date birthDate
   String biography
@@ -34,11 +38,13 @@ class Profile {
   Date dateCreated
   Date lastUpdated
 
+  static transients = [ "displayName" ]
+
   static constraints = {
-    identity(nullable: false, unique: true, maxSize: 150)
-    firstName(nullable: true)
-    lastName(nullable: true)
-    displayName(nullable: true, maxSize: 150)
+    identity(nullable: false, unique: true, maxSize: 50)
+    firstName(nullable: true, maxSize: 50)
+    lastName(nullable: true, maxSize: 50)
+    name(nullable: true, maxSize: 100)
     birthDate(nullable: true)
     biography(nullable: true, maxSize: 1000)
     homepage(url: true, nullable: true)
@@ -47,6 +53,21 @@ class Profile {
     city(nullable: true)
     country(nullable: true)
     photo(nullable: true)
+  }
+
+  String getDisplayName() {
+    if(this.displayName) {
+      return this.displayName
+    }
+    if(name) {
+      return String.format("%s (%s)", name, identity)
+    } else {
+      return identity
+    }
+  }
+
+  void setDisplayName(String displayName) {
+    this.displayName = displayName;
   }
 
   String toString() {
