@@ -20,7 +20,7 @@ environments {
   }
   test {
     dataSource {
-      dbCreate = "update"
+      dbCreate = "create"
       url = "jdbc:hsqldb:file:testDb;shutdown=true"
     }
   }
