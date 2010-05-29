@@ -20,7 +20,6 @@
 <body>
 <div class="nav">
   <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
-  <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
 </div>
 <div class="body">
   <div class="title">
@@ -30,7 +29,9 @@
     <div class="message">${flash.message}</div>
   </g:if>
   <div id="profileList" class="list">
-
+    <g:if test="${profileInstanceList}">
+      <div class="message">There are no profile instances registered. Create an account here.</div>
+    </g:if>
     <g:each in="${profileInstanceList}" status="i" var="profileInstance">
 
 

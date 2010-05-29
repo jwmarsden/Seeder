@@ -2,35 +2,50 @@ h2 {
     color:#008000;font-size:16px;font-weight:bold;margin-bottom:5px;
 }
 
+#tabs {
+    margin-top:2px;
+}
+
 .head {
-    color:#008000;font-size:16px
+    color:#008000;font-size:14px
 }
 
-#profileList {
-    clear:both; width:550px;
+#profileList, #profileDetail {
+    clear:both; width:600px;
 }
 
-#profileList .profile {
-    min-height:100px;background-color:#FCFCFC;border-top:1px solid;border-bottom:1px solid;border-color:#CCC;margin-bottom:2px;
+#profileList  .profile, #profileDetail .profile {
+    /*min-height:100px;background-color:#FCFCFC;border-top:1px solid;border-bottom:1px solid;border-color:#CCC;margin-bottom:2px;*/
+
 }
 
-#profileList .profileInfo {
-    padding-left:100px;
+#profileList .profileInfo, #profileDetail .profileInfo {
+    padding-left:100px;border: 1px solid #AAA;overflow:hidden;
 }
 
-#profileList .profileData {
-    padding-left:5px;padding-top:5px;vertical-align:top;min-height:75px;
+#profileList .profileData, #profileDetail .profileData {
+    padding-left:5px;padding-top:5px;vertical-align:top;min-height:90px;
 }
 
 #profileList .hover {
     background-color:#F5F5F5;cursor: pointer; cursor: hand;
 }
 
-#profileList .profilePhoto {
-    float:left;display:inline;float:left;margin-left:-100px;background-color:white;border: 0px;height:100px;width:100px;
+#profileList .profilePhoto ,#profileDetail .profilePhoto {
+    float:left;display:inline;float:left;margin-left:-98px;margin-top:2px;margin-right:2px;margin-bottom:2px;background-color:white;border:0px;height:96px;width:96px;
 }
 
 #profileList .profileTrophies {
     height:20px;background-color:#CDCDCD;
 }
 
+.roundedCorners {
+    border-bottom-left-radius: 4px 4px;
+    border-bottom-left-radius: 4px 4px;
+    border-bottom-right-radius: 4px 4px;
+    border-bottom-right-radius: 4px 4px;
+    border-top-left-radius: 4px 4px;
+    border-top-left-radius: 4px 4px;
+    border-top-right-radius: 4px 4px;
+    border-top-right-radius: 4px 4px;
+}

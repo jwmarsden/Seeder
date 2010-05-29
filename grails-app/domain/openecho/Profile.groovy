@@ -46,7 +46,7 @@ class Profile {
     lastName(nullable: true, maxSize: 50)
     name(nullable: true, maxSize: 100)
     birthDate(nullable: true)
-    biography(nullable: true, maxSize: 1000)
+    biography(nullable: true, maxSize: 5000)
     homepage(url: true, nullable: true)
     email(email: true, nullable: true)
     timezone(nullable: true)
