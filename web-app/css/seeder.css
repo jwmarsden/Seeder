@@ -7,11 +7,30 @@ h2 {
 }
 
 .head {
-    color:#008000;font-size:14px
+    color:#008000;font-size:14px;font-weight:bold;
+}
+
+.shaded {
+    background:url("../images/skin/shadow.jpg") repeat-x scroll center bottom #FFFFFF;border: 1px solid #AAA
+}
+
+.border {
+
+}
+.rc {
+    border-bottom-left-radius: 4px 4px;
+    border-bottom-left-radius: 4px 4px;
+    border-bottom-right-radius: 4px 4px;
+    border-bottom-right-radius: 4px 4px;
+    border-top-left-radius: 4px 4px;
+    border-top-left-radius: 4px 4px;
+    border-top-right-radius: 4px 4px;
+    border-top-right-radius: 4px 4px;
+    -moz-border-radius:4px 4px 4px 4px;
 }
 
 #profileList, #profileDetail {
-    clear:both; width:600px;
+    clear:both; float:left; width:600px;
 }
 
 #profileList  .profile, #profileDetail .profile {
@@ -24,7 +43,7 @@ h2 {
 }
 
 #profileList .profileData, #profileDetail .profileData {
-    padding-left:5px;padding-top:5px;vertical-align:top;min-height:90px;
+    padding-left:5px;padding-top:0px;vertical-align:top;min-height:90px;
 }
 
 #profileList .hover {
@@ -39,13 +58,19 @@ h2 {
     height:20px;background-color:#CDCDCD;
 }
 
-.roundedCorners {
-    border-bottom-left-radius: 4px 4px;
-    border-bottom-left-radius: 4px 4px;
-    border-bottom-right-radius: 4px 4px;
-    border-bottom-right-radius: 4px 4px;
-    border-top-left-radius: 4px 4px;
-    border-top-left-radius: 4px 4px;
-    border-top-right-radius: 4px 4px;
-    border-top-right-radius: 4px 4px;
+
+
+#profilePerformance {
+    margin-top:5px;    
+}
+
+#profilePerformance h3 {
+    float:left;color:#333;font-size:25px;font-weight:bold;width:75px;text-align:center;border: 1px solid #AAA;background:url("../images/skin/shadow.jpg") repeat-x scroll center bottom #FFFFFF;margin-right:2px;
+}
+#profilePerformance h3 span {
+    color:#008000;font-size:10px;display:block;
+}
+
+#biography p {
+    padding-bottom:5px;
 }

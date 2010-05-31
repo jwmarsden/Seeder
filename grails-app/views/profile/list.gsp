@@ -42,7 +42,7 @@
           <div class="profileData">
             <div class="head">${fieldValue(bean: profileInstance, field: "displayName")}</div>
           </div>
-          
+
           <div class="profileTrophies"><img style="height:20;width:20"><img style="height:20;width:20"><img style="height:20;width:20"></div>
         </div>
       </div>
@@ -53,6 +53,8 @@
 
 
   </div>
+
+
 </div>
 </body>
 </html>

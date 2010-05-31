@@ -8,7 +8,7 @@
   <title><g:message code="default.show.label" args="[entityName]" /></title>
   <jq:jquery>
     $(document).ready(function() {
-      $("#tabs").tabs();
+      $("#tabs").tabs({ disabled: [2] });
     });
   </jq:jquery>
   <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
@@ -27,40 +27,57 @@
       <div class="message">${flash.message}</div>
     </g:if>
     <div class="profile">
-      <div class="profileInfo roundedCorners">
+      <div class="profileInfo rc shaded">
         <img class="profilePhoto" src="<g:createLinkTo dir='images' file='user.png'/>" alt="photo" />
 
         <div class="profileData">
           <div class="head">${fieldValue(bean: profileInstance, field: "displayName")}</div>
+          <div id="profilePerformance">
+            <h3 class="metric rc">4<span>Followers</span></h3>
+            <h3 class="metric rc">8000<span>Seeds</span></h3>
+            <h3 class="metric rc">450<span>Edits</span></h3>
+          </div>
         </div>
 
         <div style="clear:both"></div>
       </div>
       <div id="tabs" style="clear:both">
         <ul>
-          <li><a href="#fragment-1"><span>Biography</span></a></li>
-          <li><a href="#fragment-2"><span>Relationships</span></a></li>
-          <li><a href="#fragment-3"><span>TBA</span></a></li>
+          <li><a href="#biography"><span>Biography</span></a></li>
+          <li><a href="#relationships"><span>Relationships</span></a></li>
+          <li><a class="seeds" href="#seeds"><span>Seeds</span></a></li>
         </ul>
-        <div id="fragment-1">
+        <div id="biography" class="shaded" style="min-height:300px">
           <markdown:renderHtml>${fieldValue(bean: profileInstance, field: "biography")}</markdown:renderHtml>
         </div>
-        <div id="fragment-2">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+        <div id="relationships">
+
         </div>
-        <div id="fragment-3">
+        <div id="seeds">
         </div>
       </div>
     </div>
+
   </div>
-  <div class="buttons">
+
+  <!--
+  <div id="profileMenu">
+    <button>Follow Profile</button>
+    <button>Block Profile</button>
+  </div>
+  <div class="buttons" style="clear:both">
     <g:form>
-      <g:hiddenField name="id" value="${profileInstance?.id}" />
-      <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
+    <g:hiddenField name="id" value="${profileInstance?.id}" />
+    <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
       <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
-    </g:form>
+  </g:form>
   </div>
+  -->
+
+</div>
+<div style="clear:both;"></div>
+<div class="rc shaded" style="margin-top:2px;min-height:50px">
+
 </div>
 </body>
 </html>
