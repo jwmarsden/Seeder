@@ -14,14 +14,17 @@ class ProfileIntegrationTests extends GrailsUnitTestCase {
   void testCreateNewProfile() {
     def emptyProfile = new Profile()
     assertNull(emptyProfile.save())
-    def profile = new Profile(identity: "openecho")
+    def profile = new Profile(identity: "openecho2")
+    profile.validate()
+    println profile.errors
     assertNotNull(profile.save())
+
   }
 
   void testCreateNewProfileWithUser() {
     def user = new User(userName: 'jwm', newPassword: 'mwjwm', type: "LOCAL", email: 'jwm@gmail.com')
     assertNotNull(user.save())
-    def profile = new Profile(identity: "openecho")
+    def profile = new Profile(identity: "openecho2")
     assertNotNull(profile.save())
     profile.addToUsers(user);
     assertNotNull(profile.save())
@@ -56,11 +59,11 @@ class ProfileIntegrationTests extends GrailsUnitTestCase {
 
   void testFollowProfileCreateFollowProfile() {
     println "= creating profile1"
-    def profile1 = new Profile(identity: "openecho")
+    def profile1 = new Profile(identity: "openecho2")
     assertNotNull(profile1.save(flush: true))
     println "= profile1 created {$profile1.id}"
     println "= creating profile2"
-    def profile2 = new Profile(identity: "seeder org")
+    def profile2 = new Profile(identity: "seeder org2")
     assertNotNull(profile2.save(flush: true))
     println "= profile2 created {$profile2.id}"
 
@@ -80,9 +83,9 @@ class ProfileIntegrationTests extends GrailsUnitTestCase {
 
   void testAddToFollowing() {
     println "= profile1 follow profile2"
-    def profile1 = new Profile(identity: "openecho")
+    def profile1 = new Profile(identity: "openecho2")
     assertNotNull(profile1.save(flush: true))
-    def profile2 = new Profile(identity: "seeder org")
+    def profile2 = new Profile(identity: "seeder org2")
     assertNotNull(profile2.save(flush: true))
 
     profile1.addToFollowing(profile2)
@@ -97,9 +100,9 @@ class ProfileIntegrationTests extends GrailsUnitTestCase {
 
 
   void testRemoveFromFollowing() {
-    def profile1 = new Profile(identity: "openecho")
+    def profile1 = new Profile(identity: "openecho2")
     assertNotNull(profile1.save(flush: true))
-    def profile2 = new Profile(identity: "seeder org")
+    def profile2 = new Profile(identity: "seeder org2")
     assertNotNull(profile2.save(flush: true))
 
     profile1.addToFollowing(profile2)
@@ -123,9 +126,9 @@ class ProfileIntegrationTests extends GrailsUnitTestCase {
 
   void testAddToBlocking() {
     println "= profile1 block profile2"
-    def profile1 = new Profile(identity: "openecho")
+    def profile1 = new Profile(identity: "openecho2")
     assertNotNull(profile1.save(flush: true))
-    def profile2 = new Profile(identity: "seeder org")
+    def profile2 = new Profile(identity: "seeder org2")
     assertNotNull(profile2.save(flush: true))
 
     profile1.addToBlocking(profile2)
@@ -139,9 +142,9 @@ class ProfileIntegrationTests extends GrailsUnitTestCase {
   }
 
   void testRemoveFromBlocking() {
-    def profile1 = new Profile(identity: "openecho")
+    def profile1 = new Profile(identity: "openecho2")
     assertNotNull(profile1.save(flush: true))
-    def profile2 = new Profile(identity: "seeder org")
+    def profile2 = new Profile(identity: "seeder org2")
     assertNotNull(profile2.save(flush: true))
 
     profile1.addToBlocking(profile2)
@@ -208,9 +211,9 @@ class ProfileIntegrationTests extends GrailsUnitTestCase {
 
   void testAddToFriends() {
     println "= profile1 friend profile2"
-    def profile1 = new Profile(identity: "openecho")
+    def profile1 = new Profile(identity: "openecho2")
     assertNotNull(profile1.save(flush: true))
-    def profile2 = new Profile(identity: "seeder org")
+    def profile2 = new Profile(identity: "seeder org2")
     assertNotNull(profile2.save(flush: true))
 
     profile1.addToFriends(profile2)
@@ -223,9 +226,9 @@ class ProfileIntegrationTests extends GrailsUnitTestCase {
 
   void testRemoveFromFriends() {
     println "= profile1 friend profile2"
-    def profile1 = new Profile(identity: "openecho")
+    def profile1 = new Profile(identity: "openecho2")
     assertNotNull(profile1.save(flush: true))
-    def profile2 = new Profile(identity: "seeder org")
+    def profile2 = new Profile(identity: "seeder org2")
     assertNotNull(profile2.save(flush: true))
 
     profile1.addToFriends(profile2)
