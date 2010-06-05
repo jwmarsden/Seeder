@@ -52,10 +52,12 @@
   </jq:jquery>
 </head>
 <body>
+  <g:render template='/includes/ajaxLogin'/>
 <div style="width: 800px; margin:0 auto">
   <div id="header" style="margin-bottom:10px; padding:0; float:left">
     <img src="<g:createLinkTo dir='images' file='seeder_logo.png'/>" alt="logo"/>
   </div>
+
   <ul id="navbar" class="topnav shaded" style="float:right">
     <li id="navbarHome"><g:link controller="user" action="register" class="register">${message(code: 'seeder.button.register.label')}</g:link></li>
     <li id="navbarGo"><span class="go">${message(code: 'seeder.button.go.label')}</span>
@@ -69,37 +71,19 @@
     <li id="navbarLogin"><span class="login">${message(code: 'seeder.button.login.label')}</span></li>
   </ul>
   <div style="clear:both;">
+      <span id='loginLink' style='position: relative; margin-right: 30px; float: right; top: 0px'>
+   <g:isLoggedIn>
+   Logged in as <g:loggedInUsername/> (<g:link controller='logout'>Logout</g:link>)
+   </g:isLoggedIn>
+   <g:isNotLoggedIn>
+   Not logged in
+   </g:isNotLoggedIn>
+   </span>
+  
     <g:layoutBody />
   </div>
 </div>
 <div id="dialog" title="Dialog Title" style="display:none">I'm in a dialog</div>
-<div id="loginDialog" class="login">
-  <div id='login'>
-    <div class='inner'>
-      <!--<g:if test='${flash.message}'>
-        <div class='login_message'>${flash.message}</div>
-      </g:if>-->
-      <div class='fheader'>Enter Your Login Details</div>
-      <form action='${postUrl}' method='POST' id='loginForm' class='cssform'>
-        <p>
-          <label for='j_username'>Username</label>
-          <input type='text' class='text_' name='j_username' id='j_username' value='${request.remoteUser}' />
-        </p>
-        <p>
-          <label for='j_password'>Password</label>
-          <input type='password' class='text_' name='j_password' id='j_password' />
-        </p>
-        <p>
-          <label for='remember_me'>Remember me</label>
-          <input type='checkbox' class='chk' name='_spring_security_remember_me' id='remember_me'
-            <g:if test='${hasCookie}'>checked='checked'</g:if> />
-        </p>
-        <p class="buttons">
-          <input type="button" value='Cancel' /><input type='submit' value='Login' />
-        </p>
-      </form>
-    </div>
-  </div>
-</div>
+
 </body>
 </html>
