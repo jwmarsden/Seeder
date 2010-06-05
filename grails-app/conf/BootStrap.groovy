@@ -1,10 +1,18 @@
 class BootStrap {
-
-     def init = { servletContext ->
-       new openecho.Profile(identity:"openecho",firstName:"John",lastName:"Marsden",name:"John Marsden",biography:"##This is a biography\n\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.").save()
-       new openecho.Profile(identity:"jmarsden",firstName:"John",lastName:"Marsden",name:"John Marsden",biography:"##This is a biography\n\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.").save()
-
-     }
-     def destroy = {
-     }
+    def authenticateService
+    
+    def init = { servletContext ->
+        // Create Roles
+        def everyoneRole = new openecho.Role(authority:"ROLE_EVERYONE", description:"Role for Users").save()
+        def administratorRole = new openecho.Role(authority:"ROLE_ADMIN", description:"Role for Administrators").save()
+        // Create Users
+        def jmarsdenUser = new openecho.User(username: "jmarsden", passwd: authenticateService.encodePassword("rah"), email: "j.w.marsden@gmail.com", enabled: true)
+        jmarsdenUser.addToAuthorities(everyoneRole).addToAuthorities(administratorRole).save()
+        // Create Profiles
+        def openechoProfile = new openecho.Profile(identity:"openecho",firstName:"John",lastName:"Marsden",name:"John Marsden",biography:"##Openecho! :-)\n\nPlay Profile").save()
+        def jmarsdenProfile = new openecho.Profile(identity:"jmarsden",firstName:"John",lastName:"Marsden",name:"John Marsden",biography:"##Openecho! >:-0\n\nSerious Profile").save()
+        jmarsdenUser.addToProfiles(openechoProfile).addToProfiles(jmarsdenProfile).save()
+    }
+    def destroy = {
+    }
 } 
