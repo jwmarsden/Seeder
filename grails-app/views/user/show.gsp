@@ -31,11 +31,6 @@
 				</tr>
 
 				<tr class="prop">
-					<td valign="top" class="name">Full Name:</td>
-					<td valign="top" class="value">${person.userRealName?.encodeAsHTML()}</td>
-				</tr>
-
-				<tr class="prop">
 					<td valign="top" class="name">Enabled:</td>
 					<td valign="top" class="value">${person.enabled}</td>
 				</tr>

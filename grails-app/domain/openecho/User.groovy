@@ -17,7 +17,7 @@ class User {
   
   /** Username */
   String username
-  String userRealName
+  
   /** MD5 Password */
   String passwd
   /** enabled */
@@ -30,7 +30,7 @@ class User {
   String description = ''
 
   /** plain password to create a MD5 password */
-  String pass = '[secret]'
+  String pass = '[$blazr]/'
 
   String type="LOCAL"
   
@@ -39,7 +39,6 @@ class User {
 
   static constraints = {
     username(blank: false, unique: true)
-    userRealName(nullable: true)
     passwd(nullable: false, blank: false)
     email(nullable: false, blank: false)
     enabled()
