@@ -11,22 +11,123 @@ h2 {
 }
 
 .shaded {
-    background:url("../images/skin/shadow.jpg") repeat-x scroll center bottom #FFFFFF;border: 1px solid #AAA
+    background:url("../images/skin/region_shadow.jpg") repeat-x scroll center bottom #FFFFFF;
 }
 
 .border {
 
 }
 .rc {
-    border-bottom-left-radius: 4px 4px;
+    border: 1px solid #aaaaaa;
     border-bottom-left-radius: 4px 4px;
     border-bottom-right-radius: 4px 4px;
-    border-bottom-right-radius: 4px 4px;
     border-top-left-radius: 4px 4px;
-    border-top-left-radius: 4px 4px;
-    border-top-right-radius: 4px 4px;
     border-top-right-radius: 4px 4px;
     -moz-border-radius:4px 4px 4px 4px;
+}
+
+/*************************************************
+** Start navbar CSS
+*************************************************/
+#navbar {
+    border-left: 1px solid #aaaaaa;border-bottom: 1px solid #aaaaaa;border-right: 1px solid #aaaaaa;
+    border-bottom-left-radius: 4px 4px;border-bottom-right-radius: 4px 4px;-moz-border-radius:0px 0px 4px 4px;
+    color:#008000;font-size: 12px;height: 26px;line-height: 26px;font-weight:bold;
+    padding:0 5px;
+}
+
+#navbar ul.topnav {
+    list-style: none;
+}
+
+#navbar ul.subnav {
+    border-left: 1px solid #aaaaaa;border-bottom: 1px solid #aaaaaa;border-right: 1px solid #aaaaaa;border-top:1px solid #aaaaaa;
+    list-style: none;
+    background-color:#FFF;
+    position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
+    margin: 0; padding: 0;
+    display: none;
+    float: left;
+    overflow: hidden;
+    text-align: left;
+    border-bottom-left-radius: 4px 4px;border-bottom-right-radius: 4px 4px;-moz-border-radius:0px 0px 4px 4px;
+}
+
+#navbar li {
+    color:#666;padding-right:5px;display:inline-block;text-align:center;padding:0 5px;min-width:50px;
+}
+
+#navbar li > a {
+    color:#666;padding-left:18px;display:block;
+}
+#navbar li > span {
+    color:#666;padding-left:18px;display:block;
+}
+
+#navbar li .register {
+    background:url(../images/icon/register.png) center left no-repeat;
+}
+#navbar li .go {
+    background:url(../images/icon/go.png) center left no-repeat;
+}
+#navbar li .login {
+    background:url(../images/icon/login.png) center left no-repeat;
+}
+#navbar li .search {
+    background:url(../images/icon/search.png) center right no-repeat;
+}
+
+#navbar li.hover,  #navbar li.hover > a, #navbar li.hover > span {
+    color:#008000;cursor:pointer;cursor:hand;
+}
+
+#navbar li.navbar_selected {
+    background-color:#DDD;
+}
+
+#navbar ul.subnav li {
+    display:block;border-left:4px solid #008000;text-align:left;
+}
+/*************************************************
+** End navbar CSS
+*************************************************/
+
+
+
+
+#loginDialog {
+    border-left: 1px solid #aaaaaa;border-bottom: 1px solid #aaaaaa;border-right: 1px solid #aaaaaa;border-top:1px solid #aaaaaa;
+    list-style: none;
+    background-color:#FFF;
+    position: absolute; 
+    margin: 0; padding:0;
+    display: none;
+    overflow: hidden;
+    border-bottom-left-radius: 4px 4px;border-bottom-right-radius: 4px 4px;-moz-border-radius:0px 0px 4px 4px;
+}
+
+#loginDialog #login {
+    border-left:4px solid #008000;padding:0 5px;
+}
+
+#menubar {
+    clear:both;
+    margin-top:5px;
+    margin-bottom:5px;
+    border-bottom-left-radius: 8px 8px;
+    border-bottom-right-radius: 8px 8px;
+    border-top-left-radius: 8px 8px;
+    border-top-right-radius: 8px 8px;
+    -moz-border-radius:8px 8px 8px 8px;
+    border: 1px solid #aaaaaa/*{borderColorHeader}*/; background: #cccccc/*{bgColorHeader}*/ url(../images/skin/nav_shadow.png)/*{bgImgUrlHeader}*/ 50%/*{bgHeaderXPos}*/ 50%/*{bgHeaderYPos}*/ repeat-x/*{bgHeaderRepeat}*/; color: #222222/*{fcHeader}*/; font-weight: bold;
+}
+
+#menubar li {
+    display: inline;
+    font-size: 14px;
+    height: 26px;
+    line-height: 26px;
+    border-right: 1px solid #aaaaaa;
 }
 
 #profileList, #profileDetail {
@@ -37,6 +138,10 @@ h2 {
     /*min-height:100px;background-color:#FCFCFC;border-top:1px solid;border-bottom:1px solid;border-color:#CCC;margin-bottom:2px;*/
 
 }
+
+
+
+
 
 #profileList .profileInfo, #profileDetail .profileInfo {
     padding-left:100px;border: 1px solid #AAA;overflow:hidden;
@@ -65,7 +170,11 @@ h2 {
 }
 
 #profilePerformance h3 {
-    float:left;color:#333;font-size:25px;font-weight:bold;width:75px;text-align:center;border: 1px solid #AAA;background:url("../images/skin/shadow.jpg") repeat-x scroll center bottom #FFFFFF;margin-right:2px;
+    float:left;color:#333;font-size:25px;font-weight:bold;width:75px;text-align:center;border: 1px solid #AAA;background:url("../images/skin/region_shadow.jpg") repeat-x scroll center bottom #FFFFFF;margin-right:2px;
+}
+
+#profilePerformance .hover {
+    background:none;background-color:#CCC;cursor: pointer; cursor: hand;
 }
 #profilePerformance h3 span {
     color:#008000;font-size:10px;display:block;

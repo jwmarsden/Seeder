@@ -15,6 +15,8 @@ class UserTests extends GrailsUnitTestCase {
   void testCreateNewUser() {
     mockDomain(User)
     def user = new User(userName: 'jwm', newPassword: 'mwjwm', type: "LOCAL", email: 'jwm@gmail.com')
+    user.validate()
+    println user.errors
     assertNotNull(user.save())
     assertNotNull(user.id)
     def foundUser = User.get(user.id)
@@ -24,6 +26,8 @@ class UserTests extends GrailsUnitTestCase {
   void testCreateNonUniqueUser() {
     mockDomain(User)
     def user = new User(userName: 'jwm', newPassword: 'mwjwm', type: "LOCAL", email: 'jwm@gmail.com')
+    user.validate()
+    println user.errors
     assertNotNull(user.save())
     user = new User(userName: 'jwm', newPassword: 'mwjwm', type: "LOCAL", email: 'jwm2@gmail.com')
     assertNull(user.save())

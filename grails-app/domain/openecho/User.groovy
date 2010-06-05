@@ -1,40 +1,52 @@
 package openecho
 
-class User {
-  static transients = [ "newPassword" ]
+import openecho.Role
 
-  static hasMany = [ profiles : Profile ]
-  static belongsTo = Profile
+/**
+ * User domain class.
+ */
+class User {
+  static hasMany = [ profiles : Profile, authorities: Role]
+  static belongsTo = [ Profile, Role ]
+
+  static transients = ['pass']
 
   static mapping = {
     profiles lazy:false
   }
+  
+  /** Username */
+  String username
+  String userRealName
+  /** MD5 Password */
+  String passwd
+  /** enabled */
+  boolean enabled
 
-  String userName
-  String password
-  String type
   String email
-  boolean active = true
+  boolean emailShow
+
+  /** description */
+  String description = ''
+
+  /** plain password to create a MD5 password */
+  String pass = '[secret]'
+
+  String type="LOCAL"
+  
   Date dateCreated
   Date lastUpdated
 
   static constraints = {
-    userName(size:3..150, unique: true)
-    password(nullable: false)
-    type(nullable: false, inList:["LOCAL","OPEN_ID"])
-    email(email: true, nullable: true)
-    active(nullable: false)
-  }
-
-  void setNewPassword(String newPassword) {
-    password = newPassword
-  }
-
-  String getNewPassword() {
-    return null
+    username(blank: false, unique: true)
+    userRealName(nullable: true)
+    passwd(nullable: false, blank: false)
+    email(nullable: false, blank: false)
+    enabled()
+    type(nullable: false, blank: false, inList:["LOCAL","OPEN_ID"])
   }
 
   String toString() {
-    "User for ${userName} (${id})"
+    "User for ${username} (${id})"
   }
 }

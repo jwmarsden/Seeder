@@ -9,15 +9,33 @@
   <jq:jquery>
     $(document).ready(function() {
       $("#tabs").tabs({ disabled: [2] });
+      $("#profilePerformance .metric").hover(
+      function () {
+        $(this).addClass("hover");
+      },
+      function () {
+        $(this).removeClass("hover");
+      })
     });
+
+
   </jq:jquery>
   <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<!--
 <div class="nav">
   <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
   <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
 </div>
+
+<div id="menubar">
+  <ul>
+    <li>Something</li>
+    <li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+  </ul>
+</div>
+-->
 <div class="body">
   <div class="title">
     <h2 style=""><g:message code="default.show.label" args="[entityName]" /></h2><!--Filter results:<input type="text" value="" />-->
@@ -33,9 +51,9 @@
         <div class="profileData">
           <div class="head">${fieldValue(bean: profileInstance, field: "displayName")}</div>
           <div id="profilePerformance">
-            <h3 class="metric rc">4<span>Followers</span></h3>
-            <h3 class="metric rc">8000<span>Seeds</span></h3>
-            <h3 class="metric rc">450<span>Edits</span></h3>
+            <h3 class="metric rc shaded">4<span>Followers</span></h3>
+            <h3 class="metric rc shaded">8000<span>Seeds</span></h3>
+            <h3 class="metric rc shaded">450<span>Edits</span></h3>
           </div>
         </div>
 
