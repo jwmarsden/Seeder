@@ -47,30 +47,13 @@ function authAjax() {
       data: ajaxLoginParams,
       success: function(response) {
         $.log($.stringFormat('Ajax Response:\'{0}\'',[response]));
+        var responseJSON = jQuery.parseJSON(response);
+        if(responseJSON.error) {
+          $.log('Error');
+        } else if(responseJSON.success) {
+          $.log('Success');
+        }
       }
     });
-   /*
-   var form = document.ajaxLoginForm;
-   var params = Form.serialize(form) + '&spring-security-redirect=/login/ajaxSuccess';
-   Form.disable(form);
-   new Ajax.Request(form.action, {
-      method: 'POST',
-      postBody: params,
-      onSuccess: function(response) {
-         var responseText = response.responseText || '[]';
-         var json = responseText.evalJSON();
-         if (json.success) {
-            onSuccessfulLogin();
-         }
-         else if (json.error) {
-            Element.update('loginMessage', "<span class='errorMessage'>" + json.error + '</error>');
-            Form.enable(document.ajaxLoginForm);
-         }
-         else {
-            Element.update('loginMessage', responseText);
-            Form.enable(document.ajaxLoginForm);
-         }
-      }
-   });*/
 }
 </script>
