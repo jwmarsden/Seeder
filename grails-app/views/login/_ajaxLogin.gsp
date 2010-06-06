@@ -37,6 +37,9 @@
         </p>
       </form>
     </div>
+    <div class="details">
+      Logged In.
+    </div>
   </div>
 </div>
 
@@ -62,9 +65,13 @@ function authAjax() {
         $.log($.stringFormat('Ajax Response:\'{0}\'',[response]));
         var responseJSON = jQuery.parseJSON(response);
         if(responseJSON.success) {
-          $.log("Success")
+          $.log("Success");
+          $("#login > div.inner").fadeOut();
+          $("#login > div.details").fadeIn();
         } else {
-          $.log("Error")
+          $.log("Error");
+          $("#login > div.inner").fadeIn();
+          $("#login > div.details").fadeOut();
         }
       }
     });

@@ -53,6 +53,7 @@
 </head>
 <body>
   <g:render template='/login/ajaxLogin'/>
+  
 <div style="width: 800px; margin:0 auto">
   <div id="header" style="margin-bottom:10px; padding:0; float:left">
     <img src="<g:createLinkTo dir='images' file='seeder_logo.png'/>" alt="logo"/>
@@ -75,6 +76,6 @@
   </div>
 </div>
 <div id="dialog" title="Dialog Title" style="display:none">I'm in a dialog</div>
-
+<g:render template='/element/overlay'/>
 </body>
 </html>

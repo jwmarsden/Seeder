@@ -33,15 +33,15 @@ h2 {
     border-left: 1px solid #aaaaaa;border-bottom: 1px solid #aaaaaa;border-right: 1px solid #aaaaaa;
     border-bottom-left-radius: 4px 4px;border-bottom-right-radius: 4px 4px;-moz-border-radius:0px 0px 4px 4px;
     color:#008000;font-size: 12px;height: 26px;line-height: 26px;font-weight:bold;
-    padding:0 5px;
+    padding:0 5px;z-index:100;
 }
 
 #navbar ul.topnav {
-    list-style: none;
+    list-style: none;z-index:80;
 }
 
 #navbar ul.subnav {
-    border-left: 1px solid #aaaaaa;border-bottom: 1px solid #aaaaaa;border-right: 1px solid #aaaaaa;border-top:1px solid #aaaaaa;
+    border-left: 1px solid #aaaaaa;border-bottom: 1px solid #aaaaaa;border-right: 1px solid #aaaaaa;border-top:1px solid #aaaaaa;z-index:80;
     list-style: none;
     background-color:#FFF;
     position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
@@ -54,7 +54,7 @@ h2 {
 }
 
 #navbar li {
-    color:#666;padding-right:5px;display:inline-block;text-align:center;padding:0 5px;min-width:50px;
+    color:#666;padding-right:5px;display:inline-block;text-align:center;padding:0 5px;min-width:50px;z-index:80;
 }
 
 #navbar li > a {
@@ -88,6 +88,10 @@ h2 {
 #navbar ul.subnav li {
     display:block;border-left:4px solid #008000;text-align:left;
 }
+
+#overlay {
+    z-index:10;position:absolute;top:0;left:0;background-color: red;
+}
 /*************************************************
 ** End navbar CSS
 *************************************************/
@@ -106,7 +110,7 @@ h2 {
     display: none;
     overflow: hidden;
     border-bottom-left-radius: 4px 4px;border-bottom-right-radius: 4px 4px;-moz-border-radius:0px 0px 4px 4px;
-    z-index: 100;
+    z-index: 100;width:225px;
 }
 
 #loginDialog #login {

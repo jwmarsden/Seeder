@@ -15,6 +15,7 @@ jQuery.log = function(message,level) {
     }
 };
 
+
 function checkForNavbarClose(elementSet) {
     //$.log($.stringFormat('Close check for \'{0}\'', [elementSet[0].id]));
     //$.log(elementSet);
