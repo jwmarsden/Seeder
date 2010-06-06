@@ -30,8 +30,8 @@
         ************************************/
       var navbarGoSubmenuSelector = "#navbarGo .subnav";
       var navbarGoSelector = "#navbarGo";
-      $(navbarGoSelector).each(function() {this.helper=goMenuHelper;goMenuHelper.subElement=this});
-      $(navbarGoSubmenuSelector).each(function() {this.helper=goMenuHelper;goMenuHelper.subElement=this});
+      $(navbarGoSelector).each(function() {this.helper=navbar.goMenuHelper;navbar.goMenuHelper.subElement=this});
+      $(navbarGoSubmenuSelector).each(function() {this.helper=navbar.goMenuHelper;navbar.goMenuHelper.subElement=this});
       $(navbarGoSelector).click(function(event) {
         $(navbarGoSubmenuSelector).each(function() {this.helper.toggle($(this),$(this).parent())});
       });
@@ -40,8 +40,8 @@
       ************************************/
       var navbarLoginSelector = "#navbarLogin";
       var loginDialogSelector = "#loginDialog";
-      $(navbarLoginSelector).each(function() {this.helper=loginDialogHelper;loginDialogHelper.subElement=this});
-      $(loginDialogSelector).each(function() {this.helper=loginDialogHelper;loginDialogHelper.subElement=this});
+      $(navbarLoginSelector).each(function() {this.helper=navbar.loginDialogHelper;navbar.loginDialogHelper.subElement=this});
+      $(loginDialogSelector).each(function() {this.helper=navbar.loginDialogHelper;navbar.loginDialogHelper.subElement=this});
       $(navbarLoginSelector).click(function() {
         $(loginDialogSelector).each(function() {this.helper.toggle($(this),$(navbarLoginSelector))});
       });
@@ -58,19 +58,7 @@
   <div id="header" style="margin-bottom:10px; padding:0; float:left">
     <img src="<g:createLinkTo dir='images' file='seeder_logo.png'/>" alt="logo"/>
   </div>
-
-  <ul id="navbar" class="topnav shaded" style="float:right">
-    <li id="navbarHome"><g:link controller="user" action="register" class="register">${message(code: 'seeder.button.register.label')}</g:link></li>
-    <li id="navbarGo"><span class="go">${message(code: 'seeder.button.go.label')}</span>
-      <ul class="subnav">
-        <g:each var="c" in="${grailsApplication.controllerClasses}">
-          <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-        </g:each>
-      </ul>
-    </li>
-    <li id="search"><input type="text" class="search"/></li>
-    <li id="navbarLogin"><span class="login">${message(code: 'seeder.button.login.label')}</span></li>
-  </ul>
+  <g:render template='/element/navbar'/>
   <div style="clear:both;">
     <g:layoutBody />
   </div>
