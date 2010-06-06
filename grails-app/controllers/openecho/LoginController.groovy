@@ -106,7 +106,7 @@ class LoginController {
 	 */
 	def ajaxSuccess = {
 		nocache(response)
-		render '{success: true}'
+		render '{\"success\": true}'
 	}
 
 	/**
@@ -130,7 +130,7 @@ class LoginController {
 	// Denial page (data|view|json) for Ajax access.
 	def deniedAjax = {
 		//this is example:
-		render "{error: 'access denied'}"
+		render "{\"success\": false, \"error\": \"access denied\"}"
 	}
 
 	/**
@@ -146,12 +146,12 @@ class LoginController {
 				msg = "[$username] is disabled."
 			}
 			else {
-				msg = "[$username] wrong username/password."
+				msg = "[$username] wrong username or password."
 			}
 		}
 
 		if (isAjax()) {
-			render "{error: '${msg}'}"
+			render "{\"success\": false, \"error\": \"${msg}\"}"
 		}
 		else {
 			flash.message = msg

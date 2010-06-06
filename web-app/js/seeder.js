@@ -80,7 +80,7 @@ var loginDialogHelper = {
         return loginDialogHelper.status;
     },
     show: function(element, parentElement) {
-        var leftPos =  parentElement.position().left - element.width() + parentElement.width();
+        var leftPos =  parentElement.position().left - element.width() + parentElement.width()+8;
         var topPos = parentElement.parent().position().top + parentElement.parent().height();
         element.css('left', leftPos);
         element.css('top', topPos);

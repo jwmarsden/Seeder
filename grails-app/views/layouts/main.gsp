@@ -52,7 +52,7 @@
   </jq:jquery>
 </head>
 <body>
-  <g:render template='/includes/ajaxLogin'/>
+  <g:render template='/login/ajaxLogin'/>
 <div style="width: 800px; margin:0 auto">
   <div id="header" style="margin-bottom:10px; padding:0; float:left">
     <img src="<g:createLinkTo dir='images' file='seeder_logo.png'/>" alt="logo"/>
@@ -71,15 +71,6 @@
     <li id="navbarLogin"><span class="login">${message(code: 'seeder.button.login.label')}</span></li>
   </ul>
   <div style="clear:both;">
-      <span id='loginLink' style='position: relative; margin-right: 30px; float: right; top: 0px'>
-   <g:isLoggedIn>
-   Logged in as <g:loggedInUsername/> (<g:link controller='logout'>Logout</g:link>)
-   </g:isLoggedIn>
-   <g:isNotLoggedIn>
-   Not logged in
-   </g:isNotLoggedIn>
-   </span>
-  
     <g:layoutBody />
   </div>
 </div>
