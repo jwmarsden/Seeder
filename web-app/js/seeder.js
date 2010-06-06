@@ -14,3 +14,5 @@ jQuery.log = function(message,level) {
         // Stupid IE
     }
 };
+
+

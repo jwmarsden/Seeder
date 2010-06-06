@@ -11,43 +11,8 @@
   <jqui:resources />
   <g:layoutHead />
   <jq:jquery>
-
     $(document).ready(function() {
-      /************************************
-      ** Main Navbar
-      ************************************/
-      $("#navbar > li").hover(
-      function () {
-        $(this).addClass("hover");
-        checkForNavbarClose($(this));
-      },
-      function () {
-        $(this).removeClass("hover");
-      });
-
-      /************************************
-      ** Go Menu Handler
-        ************************************/
-      var navbarGoSubmenuSelector = "#navbarGo .subnav";
-      var navbarGoSelector = "#navbarGo";
-      $(navbarGoSelector).each(function() {this.helper=navbar.goMenuHelper;navbar.goMenuHelper.subElement=this});
-      $(navbarGoSubmenuSelector).each(function() {this.helper=navbar.goMenuHelper;navbar.goMenuHelper.subElement=this});
-      $(navbarGoSelector).click(function(event) {
-        $(navbarGoSubmenuSelector).each(function() {this.helper.toggle($(this),$(this).parent())});
-      });
-      /************************************
-      ** Login Dialog Handler
-      ************************************/
-      var navbarLoginSelector = "#navbarLogin";
-      var loginDialogSelector = "#loginDialog";
-      $(navbarLoginSelector).each(function() {this.helper=navbar.loginDialogHelper;navbar.loginDialogHelper.subElement=this});
-      $(loginDialogSelector).each(function() {this.helper=navbar.loginDialogHelper;navbar.loginDialogHelper.subElement=this});
-      $(navbarLoginSelector).click(function() {
-        $(loginDialogSelector).each(function() {this.helper.toggle($(this),$(navbarLoginSelector))});
-      });
-
-
-     
+      
     });
   </jq:jquery>
 </head>
