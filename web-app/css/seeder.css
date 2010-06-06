@@ -94,7 +94,9 @@ h2 {
 
 
 
-
+/*************************************************
+** Start Login dialog CSS
+*************************************************/
 #loginDialog {
     border-left: 1px solid #aaaaaa;border-bottom: 1px solid #aaaaaa;border-right: 1px solid #aaaaaa;border-top:1px solid #aaaaaa;
     list-style: none;
@@ -104,11 +106,31 @@ h2 {
     display: none;
     overflow: hidden;
     border-bottom-left-radius: 4px 4px;border-bottom-right-radius: 4px 4px;-moz-border-radius:0px 0px 4px 4px;
+    z-index: 100;
 }
 
 #loginDialog #login {
     border-left:4px solid #008000;padding:0 5px;
 }
+
+#loginDialog .header {
+    color:#008000;font-size:14px;font-weight:bold;padding:5px 0;
+}
+
+#loginDialog label {
+    color:#666;display:block;padding-top:5px;
+}
+
+#loginDialog input {
+    
+}
+
+/*************************************************
+** End Login dialog CSS
+*************************************************/
+
+
+
 
 #menubar {
     clear:both;

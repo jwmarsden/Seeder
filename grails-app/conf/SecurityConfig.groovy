@@ -1,10 +1,12 @@
 security {
 
-	// see DefaultSecurityConfig.groovy for all settable/overridable properties
+    // see DefaultSecurityConfig.groovy for all settable/overridable properties
 
-	active = true
+    active = true
 
-	loginUserDomainClass = "openecho.User"
-	authorityDomainClass = "openecho.Role"
-	requestMapClass = "openecho.Requestmap"
+    defaultRole = 'ROLE_USER'
+
+    loginUserDomainClass = "openecho.User"
+    authorityDomainClass = "openecho.Role"
+    requestMapClass = "openecho.Requestmap"
 }
