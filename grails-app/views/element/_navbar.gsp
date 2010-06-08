@@ -1,5 +1,6 @@
-<ul id="navbar" class="topnav shaded" style="float:right">
+<ul id="navbar" class="topnav shaded">
   <li id="navbarHome"><g:link controller="user" action="register" class="register">${message(code: 'seeder.button.register.label')}</g:link></li>
+
   <li id="navbarGo"><span class="go">${message(code: 'seeder.button.go.label')}</span>
     <div class="subnav">
       <ul>
@@ -9,14 +10,62 @@
       </ul>
     </div>
   </li>
-  <li id="search"><input type="text" class="search"/>
+
+  <li id="navbarSearch"><input type="text" class="search"/>
     <div class="subnav">
       Submit Button
     </div>
   </li>
-  <li id="navbarLogin"><span class="login">${message(code: 'seeder.button.login.label')}</span></li>
+
+  <li id="navbarLogin"><span class="login">${message(code: 'seeder.button.login.label')}</span>
+      <div class="subnav">
+        <div id='login'>
+          <div class='inner'>
+            <!--<g:if test='${flash.message}'>
+              <div class='login_message'>${flash.message}</div>
+            </g:if>-->
+            <div class='header'>Use your Seeder Account</div>
+            <form action='${request.contextPath}/j_spring_security_check' method='POST' id='ajaxLoginForm' name='ajaxLoginForm' class='cssform'>
+              <p>
+                <label for='j_username'>Username</label>
+                <input type='text' class='text_' name='j_username' id='j_username' value='${request.remoteUser}' />
+              </p>
+              <p>
+                <label for='j_password'>Password</label>
+                <input type='password' class='text_' name='j_password' id='j_password' />
+              </p>
+              <p>
+                <label for='remember_me'>Remember me</label>
+                <input type='checkbox' class='chk' name='_spring_security_remember_me' id='remember_me'
+              <g:if test='${hasCookie}'>checked='checked'</g:if> />
+              </p>
+              <p class="buttons">
+                <a href='javascript:void(0)' onclick='authAjax(); return false;'>Login</a>
+              </p>
+            </form>
+          </div>
+          <div class='inner'>
+            <div class='header'>Use your OpenID</div>
+            <p>Comming Soon</p>
+            <form action='${postUrl}' method='POST' id='loginForm' class='cssform' style="display:none">
+              <p>
+                <label for='j_username'>OpenID</label>
+                <input type='text' class='text_' name='j_username' />
+              </p>
+              <p>
+                <input type='submit' value='Login' />
+              </p>
+            </form>
+          </div>
+          <div class="details">
+            Logged In.
+          </div>
+        </div>
+      </div>
+  </li>
 </ul>
-<jq:jquery>
+<div id="navbarOverlay"></div>
+<script type='text/javascript'>
 var navbar = {
   status: 0,
   setStatus: function(newStatus) {
@@ -30,130 +79,200 @@ var navbar = {
     return navbar.status;
   },
   onHover: function(element) {
-    var navbarSet = $("#navbar > li");
-    $.log($.stringFormat("Hover over {0}", [element]), 10);
-
-    /*      for(i=0;i < navbarSet.size();i++) {
-    var navbar = navbarSet.get(i);
-    if(element != navbar && navbar.helper && navbar.getStatus()) {
-    navbar.helper.hide($(navbar.helper.subElement), $(navbar));
-    navbar.helper.show($(navbar.helper.subElement), $(navbar));
-    } else {
-    navbar.helper.hide($(navbar.helper.subElement), $(navbar));
+    $.log($.stringFormat('Hover Detected: {0}',[element['id']]),10);
+    $(element).addClass("hover");
+    if(navbar.getStatus()) {
+      var navbarSet = $("#navbar > li");
+      for(var i=0;i < navbarSet.size();i++) {
+        var tempElement = navbarSet.get(i);
+        if(element  == tempElement) {
+          $.log($.stringFormat('Open Menu: {0}',[element['id']]),10);
+          if(element.helper && element.helper.subElement) {
+            element.helper.show(element.helper.subElement);
+          }
+        } else if(tempElement.helper && tempElement.helper.subElement) {
+          tempElement.helper.hide(tempElement.helper.subElement);
+        }
+      }
     }
-    }*/
+  },
+  onUnHover: function(element) {
+    $.log($.stringFormat('UnHover Detected: {0}',[element['id']]),10);
+    $(element).removeClass("hover");
   },
   onClick: function(element) {
-    // If Register or dashbord then follow link
-    //
-    // If Menu Open then Close It
-
-    // If Menu Closed then open it
-  },
-  goMenuHelper: {
-    show: function(element, parentElement) {
-      element.slideDown(150).show();
-      parentElement.addClass("navbar_selected");
-      navbar.setStatus(1);
-    },
-    hide: function(element, parentElement) {
-      element.hide();
-      if(parentElement) {
-        parentElement.removeClass("navbar_selected");
-      }
-      navbar.setStatus(0);
-    },
-    toggle: function(element, parentElement) {
+    $.log($.stringFormat('Click Detected: {0}',[element['id']]),10);
+    var subNav = $(element).children(".subnav");
+    if(subNav) {
       if(!navbar.getStatus()) {
-       navbar.goMenuHelper.show(element, parentElement);
+        $.log($.stringFormat('Open Submenu: {0}',[element['id']]),10);
+        navbar.setStatus(1);
+        if(navbarOverlay) {
+          navbarOverlay.show();
+        }
+        if(element.helper && element.helper.subElement) {
+          element.helper.show(element.helper.subElement);
+        }
       } else {
-       navbar.goMenuHelper.hide(element, parentElement);
-      }
-    },
-    closeCheck: function(element, parentElement) {
-      if(navbar.goMenuHelper.status) {
-        navbar.goMenuHelper.hide(element, parentElement);
+        $.log($.stringFormat('Close Submenu: {0}',[element['id']]),10);
+        navbar.setStatus(0);
+        if(navbarOverlay) {
+          navbarOverlay.hide();
+        }
+        if(element.helper && element.helper.subElement) {
+          element.helper.hide(element.helper.subElement);
+        }
       }
     }
   },
-  loginDialogHelper: {
-    getStatus: function() {
-      return navbar.loginDialogHelper.status;
+  close: function() {
+    var navbarSet = $("#navbar > li");
+    for(var i=0;i < navbarSet.size();i++) {
+      var tempElement = navbarSet.get(i);
+      if(tempElement.helper && tempElement.helper.subElement) {
+        tempElement.helper.hide(tempElement.helper.subElement);
+      }
+    }
+    navbar.setStatus(0);
+  },
+  goMenuHelper: {
+    show: function(element) {
+      $.log($.stringFormat('Show Element: {0}',[element['id']]),10); 
+      $(element).fadeIn().show();
+      if(element.helper.element) {
+        $(element.helper.element).addClass("navbar_selected");
+      }
     },
-    show: function(element, parentElement) {
-      var leftPos =  parentElement.position().left - element.width() + parentElement.width()+8;
-      var topPos = parentElement.parent().position().top + parentElement.parent().height();
-      element.css('left', leftPos);
-      element.css('top', topPos);
-      element.slideDown(150).show();
-      parentElement.addClass("navbar_selected");
-      navbar.setStatus(1);
+    hide: function(element) {
+      $(element).hide();
+      if(element.helper.element) {
+        $(element.helper.element).removeClass("navbar_selected");
+      }
+    }
+  },
+  searchMenuHelper: {
+    show: function(element) {
+      $.log($.stringFormat('Show Element: {0}',[element['id']]),10);
+      $(element).fadeIn().show();
+      if(element.helper.element) {
+        $(element.helper.element).addClass("navbar_selected");
+      }
+    },
+    hide: function(element) {
+      $(element).hide();
+      if(element.helper.element) {
+        $(element.helper.element).removeClass("navbar_selected");
+      }
+    }
+  },
+  loginMenuHelper: {
+    show: function(element) {
+      //var leftPos = parentElement.position().left - element.width() + parentElement.width()+8;
+      //var topPos = parentElement.parent().position().top + parentElement.parent().height();
+      //element.css('left', leftPos);
+      ///element.css('top', topPos);
+      $(element).fadeIn().show();
+      if(element.helper.element) {
+        $(element.helper.element).addClass("navbar_selected");
+      }
     },
     hide: function(element, parentElement) {
-      element.hide();
-      if(parentElement) {
-        parentElement.removeClass("navbar_selected");
-      }
-      navbar.setStatus(0);
-    },
-    toggle: function(element, parentElement) {
-      if(!navbar.getStatus()) {
-        navbar.loginDialogHelper.show(element, parentElement);
-      } else {
-        navbar.loginDialogHelper.hide(element, parentElement);
-      }
-    },
-    closeCheck: function(element, parentElement) {
-      if(navbar.loginDialogHelper.status) {
-        navbar.loginDialogHelper.hide(element, parentElement);
+      $(element).hide();
+      if(element.helper.element) {
+        $(element.helper.element).removeClass("navbar_selected");
       }
     }
   }
 }
+var navbarOverlay = {
+    status:0,
+    show: function() {
+      var viewportwidth;
+      var viewportheight;
 
+      // the more standards compliant browsers (mozilla/netscape/opera/IE7) use window.innerWidth and window.innerHeight
 
+      if (typeof window.innerWidth != 'undefined')
+      {
+          viewportwidth = window.innerWidth,
+          viewportheight = window.innerHeight
+      }
+
+      // IE6 in standards compliant mode (i.e. with a valid doctype as the first line in the document)
+
+      else if (typeof document.documentElement != 'undefined'
+         && typeof document.documentElement.clientWidth !=
+         'undefined' && document.documentElement.clientWidth != 0)
+      {
+           viewportwidth = document.documentElement.clientWidth,
+           viewportheight = document.documentElement.clientHeight
+      }
+
+      // older versions of IE
+
+      else
+      {
+           viewportwidth = document.getElementsByTagName('body')[0].clientWidth,
+           viewportheight = document.getElementsByTagName('body')[0].clientHeight
+      }
+      $("#navbarOverlay").width(viewportwidth).height(viewportheight).show();
+    },
+    hide: function() {
+      $("#navbarOverlay").hide();
+    }
+}
+</script>
+
+<jq:jquery>
 $(document).ready(function() {
   /************************************
   ** Register Objects
   ************************************/
+  // Navbar Home
+
   // Navbar Go
   var navbarGoSubmenuSelector = "#navbarGo .subnav";
   var navbarGoSelector = "#navbarGo";
-  $(navbarGoSelector).each(function() {this.helper=navbar.goMenuHelper;navbar.goMenuHelper.subElement=this});
+  $(navbarGoSelector).each(function() {this.helper=navbar.goMenuHelper;navbar.goMenuHelper.element=this});
   $(navbarGoSubmenuSelector).each(function() {this.helper=navbar.goMenuHelper;navbar.goMenuHelper.subElement=this});
+
   // Navbar Search
+  var navbarSearchSubmenuSelector = "#navbarSearch .subnav";
+  var navbarSearchSelector = "#navbarSearch";
+  $(navbarSearchSelector).each(function() {this.helper=navbar.searchMenuHelper;navbar.searchMenuHelper.element=this});
+  $(navbarSearchSubmenuSelector).each(function() {this.helper=navbar.searchMenuHelper;navbar.searchMenuHelper.subElement=this});
 
   // Navbar Login
+  var navbarLoginSubmenuSelector = "#navbarLogin .subnav";
   var navbarLoginSelector = "#navbarLogin";
-  var loginDialogSelector = "#loginDialog";
-  $(navbarLoginSelector).each(function() {this.helper=navbar.loginDialogHelper;navbar.loginDialogHelper.subElement=this});
-  $(loginDialogSelector).each(function() {this.helper=navbar.loginDialogHelper;navbar.loginDialogHelper.subElement=this});
+  $(navbarLoginSelector).each(function() {this.helper=navbar.loginMenuHelper;navbar.loginMenuHelper.element=this});
+  $(navbarLoginSubmenuSelector).each(function() {this.helper=navbar.loginMenuHelper;navbar.loginMenuHelper.subElement=this});
 
   /************************************
-  ** Main Navbar
+  ** Main Navbar Events
   ************************************/
   $("#navbar > li").hover(
     function () {
-      $(this).addClass("hover");
-      navbar.onButtonHover($(this)[0]);
+      navbar.onHover($(this)[0]);
     },
     function () {
-      $(this).removeClass("hover");
+      navbar.onUnHover($(this)[0]);
+    });
+
+    $("#navbar > li").click(
+    function() {
+      navbar.onClick($(this)[0]);
     });
 
   /************************************
-  ** Go Menu Handler
+  ** Navbar Overlay Events
   ************************************/
-  $(navbarGoSelector).click(function(event) {
-    $(navbarGoSubmenuSelector).each(function() {this.helper.toggle($(this),$(this).parent())});
-  });
-  /************************************
-  ** Login Dialog Handler
-  ************************************/
+    $("#navbarOverlay").click(
+    function() {
+      navbar.close();
+      navbarOverlay.hide();
+    });
 
-  $(navbarLoginSelector).click(function() {
-    $(loginDialogSelector).each(function() {this.helper.toggle($(this),$(navbarLoginSelector))});
-  });
 });
 
 </jq:jquery>

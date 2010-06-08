@@ -2,7 +2,7 @@ package openecho
 
 class ProfileController {
 
-  static scaffold = true
+  //static scaffold = true
   static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
   def index = {
@@ -10,6 +10,10 @@ class ProfileController {
   }
 
   def list = {
+    log.debug(request.getHeader("user-agent"))
+    log.debug(request.getMethod())
+
+
     params.max = Math.min(params.max ? params.int('max') : 10, 100)
     [profileInstanceList: Profile.list(params), profileInstanceTotal: Profile.count()]
   }

@@ -69,6 +69,7 @@ class LoginController {
 		}
 
 		render view: view, model: [postUrl: postUrl]
+
 	}
 
 	/**

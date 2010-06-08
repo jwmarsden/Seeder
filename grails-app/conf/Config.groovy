@@ -58,7 +58,6 @@ environments {
     test {
         grails.serverURL = "http://localhost:8080/${appName}"
     }
-
 }
 
 // log4j configuration
@@ -84,6 +83,8 @@ log4j = {
            'net.sf.ehcache.hibernate'
 
     warn   'org.mortbay.log'
+
+    debug  'grails.app.controller'
 }
 
 
