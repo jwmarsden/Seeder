@@ -1,7 +1,7 @@
 <ul id="navbar" class="topnav shaded">
-  <li id="navbarHome"><g:link controller="user" action="register" class="register">${message(code: 'seeder.button.register.label')}</g:link></li>
+  <li id="navbarHome" class="topnav"><g:link controller="user" action="register" class="register">${message(code: 'seeder.button.register.label')}</g:link></li>
 
-  <li id="navbarGo"><span class="go">${message(code: 'seeder.button.go.label')}</span>
+  <li id="navbarGo" class="topnav"><span class="go">${message(code: 'seeder.button.go.label')}</span>
     <div class="subnav">
       <ul>
         <g:each var="c" in="${grailsApplication.controllerClasses}">
@@ -11,13 +11,13 @@
     </div>
   </li>
 
-  <li id="navbarSearch"><input type="text" class="search"/>
+  <li id="navbarSearch" class="topnav"><input type="text" class="search"/>
     <div class="subnav">
       Submit Button
     </div>
   </li>
 
-  <li id="navbarLogin"><span class="login">${message(code: 'seeder.button.login.label')}</span>
+  <li id="navbarLogin" class="topnav"><span class="login">${message(code: 'seeder.button.login.label')}</span>
       <div class="subnav">
         <div id='login'>
           <div class='inner'>
@@ -79,19 +79,21 @@ var navbar = {
     return navbar.status;
   },
   onHover: function(element) {
-    $.log($.stringFormat('Hover Detected: {0}',[element['id']]),10);
-    $(element).addClass("hover");
-    if(navbar.getStatus()) {
-      var navbarSet = $("#navbar > li");
-      for(var i=0;i < navbarSet.size();i++) {
-        var tempElement = navbarSet.get(i);
-        if(element  == tempElement) {
-          $.log($.stringFormat('Open Menu: {0}',[element['id']]),10);
-          if(element.helper && element.helper.subElement) {
-            element.helper.show(element.helper.subElement);
+    $.log($.stringFormat('Hover Detected: {0}: {1}',[element['id'], element]),10);
+    if(element) {
+      $(element).addClass("hover");
+      if(navbar.getStatus()) {
+        var navbarSet = $("#navbar > li");
+        for(var i=0;i < navbarSet.size();i++) {
+          var tempElement = navbarSet.get(i);
+          if(element  == tempElement) {
+            $.log($.stringFormat('Open Menu: {0}',[element['id']]),10);
+            if(element.helper && element.helper.subElement) {
+              element.helper.show(element.helper.subElement);
+            }
+          } else if(tempElement.helper && tempElement.helper.subElement) {
+            tempElement.helper.hide(tempElement.helper.subElement);
           }
-        } else if(tempElement.helper && tempElement.helper.subElement) {
-          tempElement.helper.hide(tempElement.helper.subElement);
         }
       }
     }
@@ -251,17 +253,17 @@ $(document).ready(function() {
   /************************************
   ** Main Navbar Events
   ************************************/
-  $("#navbar > li").hover(
+  $("#navbar li.topnav").children(":first-child").hover(
     function () {
-      navbar.onHover($(this)[0]);
+      navbar.onHover($(this).parent().get(0));
     },
     function () {
-      navbar.onUnHover($(this)[0]);
+      navbar.onUnHover($(this).parent().get(0));
     });
 
-    $("#navbar > li").click(
+    $("#navbar li.topnav").children(":first-child").click(
     function() {
-      navbar.onClick($(this)[0]);
+      navbar.onClick($(this).parent().get(0));
     });
 
   /************************************

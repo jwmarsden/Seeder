@@ -89,7 +89,7 @@ h2 {
     color:#666;padding-left:18px;display:block;
 }
 #navBarOverlay {
-    z-index:10;position:absolute;top:0;left:0;
+    z-index:10;position:absolute;top:0;left:0;background-color:red;
 }
 /*************************************************
 ** End navbar CSS
