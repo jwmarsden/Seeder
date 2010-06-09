@@ -28,28 +28,30 @@ class UserController {
 
 
     def register = {
-        log.debug("Enter UserController.register(" + params.toString() + ")")
+        log.debug("Enter UserController.register(" + request.getMethod() + ", " + params.toString() + ")")
         def person = new User()
-        params.init = true;
         person.properties = params
-        if(params.passwd) {
-            person.passwd = authenticateService.encodePassword(params.passwd)
-        }
-        
-        def recaptchaOK = true
-        def recaptchaVerify = recaptchaService.verifyAnswer(session, request.getRemoteAddr(), params)
-        log.debug("Recaptcha Verify:" + recaptchaVerify)
-        if(!person.hasErrors() && recaptchaVerify && person.save()) {
-            recaptchaService.cleanUp(session)
-            addRoles(person)
-            redirect action: show, id: person.id
-        }
-        if (!recaptchaVerify) {
-            recaptchaService.cleanUp(session)
-            recaptchaOK = false
+        if(request.getMethod() == "GET") {
             render view: 'register', model: [authorityList: Role.list(), person: person]
+        } else if (request.getMethod() == "POST") {
+            def recaptchaVerify = recaptchaService.verifyAnswer(session, request.getRemoteAddr(), params)
+            if (!recaptchaVerify) {
+                render view: 'register', model: [authorityList: Role.list(), person: person]
+            } else {
+
+              if(params.passwd) {
+                person.passwd = authenticateService.encodePassword(params.passwd)
+              }
+              addRoles(person)
+              if(person.save()) {
+                redirect action: show, id: person.id
+              } else {
+                recaptchaService.cleanUp(session)
+                render view: 'register', model: [authorityList: Role.list(), person: person]
+              }
+            }
         } else {
-            render view: 'register', model: [authorityList: Role.list(), person: person]
+            log.debug("Other Request!")
         }
     }
 
