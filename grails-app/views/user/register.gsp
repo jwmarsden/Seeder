@@ -11,7 +11,7 @@
     <title>Sample title</title>
   </head>
   <body>
-    <h1>Register an account!</h1>
+    <h1>${message(code: 'seeder.heading.register')}</h1>
     <div class="register" style="width:600px">
 
       <g:if test="${flash.message}">
@@ -22,6 +22,7 @@
           <g:renderErrors bean="${person}" as="list" />
         </div>
       </g:hasErrors>
+      <div class="info"><g:message code="seeder.message.register" /></div>
       <g:form action="register_save">
         <div class="dialog">
           <table>

@@ -1,4 +1,4 @@
-<ul id="navbar" class="topnav shaded">
+<ul id="navbar">
   <li id="navbarHome" class="topnav"><g:link controller="user" action="register" class="register">${message(code: 'seeder.button.register.label')}</g:link></li>
 
   <li id="navbarGo" class="topnav"><span class="go">${message(code: 'seeder.button.go.label')}</span>
@@ -11,9 +11,9 @@
     </div>
   </li>
 
-  <li id="navbarSearch" class="topnav"><input type="text" class="search"/>
+  <li id="navbarSearch" class="topnav"><span class="search"><input type="text" /></span>
     <div class="subnav">
-      Submit Button
+      Search Options Coming!
     </div>
   </li>
 

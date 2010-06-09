@@ -1,5 +1,27 @@
-h2 {
-    color:#008000;font-size:16px;font-weight:bold;margin-bottom:5px;
+
+body {
+    background: #fff;color: #333;font: 11px verdana, arial, helvetica, sans-serif;
+}
+h1, h2 {
+   color:#008000;font-weight:bold;margin-bottom:5px;
+}
+h1 { font-size:18px; }
+h2 { font-size:16px; }
+a:link, a:visited, a:hover {
+    text-decoration: none;
+}
+
+input, select, textarea {
+    background-color: #fcfcfc;
+    border: 1px solid #ccc;
+    font: 11px verdana, arial, helvetica, sans-serif;
+    margin: 0;
+    padding: 2px 2px;
+}
+
+input:focus, select:focus, textarea:focus {
+    border: 1px solid #b2d1ff;
+    background-color: #fff;
 }
 
 #tabs {
@@ -30,10 +52,10 @@ h2 {
 ** Start navbar CSS
 *************************************************/
 #navbar {
-    border-left: 1px solid #aaaaaa;border-bottom: 1px solid #aaaaaa;border-right: 1px solid #aaaaaa;
+    border-left: 1px solid #aaaaaa;border-bottom: 1px solid #aaaaaa;border-right: 1px solid #aaaaaa;background:url("../images/skin/region_shadow.jpg") repeat-x scroll center bottom #FFFFFF;
     border-bottom-left-radius: 4px 4px;border-bottom-right-radius: 4px 4px;-moz-border-radius:0px 0px 4px 4px;
-    color:#008000;font-size: 12px;height: 26px;line-height: 26px;font-weight:bold;
-    padding:0 5px;z-index:11;float:right;position:relative;
+    color:#008000;font-size: 12px;font-weight:bold;
+    padding:0;z-index:11;float:right;position:relative;
 }
 
 #navbar ul.topnav {
@@ -48,6 +70,31 @@ h2 {
     background-color:#DDD;
 }
 
+#navbar li {
+    color:#666;display:inline-block;text-align:center;min-width:60px;z-index:11;
+}
+#navbar li .register {
+    background:url(../images/icon/register.png) center left no-repeat;
+}
+#navbar li .go {
+    background:url(../images/icon/go.png) center left no-repeat;
+}
+#navbar li .login {
+    background:url(../images/icon/login.png) center left no-repeat;
+}
+#navbar li > a {
+    color:#666;display:block;padding-top:5px;padding-bottom:5px;padding-left:18px;padding-right:10px;margin-left:10px;
+}
+#navbar li > span {
+    color:#666;display:block;padding-top:5px;padding-bottom:5px;padding-left:18px;padding-right:18px;margin-left:10px;
+}
+#navbar li > span.search {
+    color:#666;display:block;padding-top:3px;padding-bottom:2px;padding-left:0px;padding-right:0px;margin:0 5px;
+}
+#navbar li > span.search input {
+    background:url(../images/icon/search.png) center right no-repeat;
+}
+
 #navbar .subnav {
     border-left: 1px solid #aaaaaa;border-bottom: 1px solid #aaaaaa;border-right: 1px solid #aaaaaa;border-top:1px solid #aaaaaa;z-index:80;
     list-style: none;
@@ -60,36 +107,14 @@ h2 {
     text-align: left;
     border-bottom-left-radius: 4px 4px;border-bottom-right-radius: 4px 4px;-moz-border-radius:0px 0px 4px 4px;
 }
-#navbar .subnav ul {
-    padding:0;margin:0;
+#navbar .subnav ul, #navbar .subnav a {
+    margin:0;padding:0;
 }
 #navbar .subnav li {
     display:block;border-left:4px solid #008000;text-align:left;
 }
-
-#navbar li {
-    color:#666;padding-right:5px;display:inline-block;text-align:center;padding:0 5px;min-width:50px;z-index:80;
-}
-#navbar li .register {
-    background:url(../images/icon/register.png) center left no-repeat;
-}
-#navbar li .go {
-    background:url(../images/icon/go.png) center left no-repeat;
-}
-#navbar li .login {
-    background:url(../images/icon/login.png) center left no-repeat;
-}
-#navbar li .search {
-    background:url(../images/icon/search.png) center right no-repeat;
-}
-#navbar li > a {
-    color:#666;padding-left:18px;display:block;
-}
-#navbar li > span {
-    color:#666;padding-left:18px;display:block;
-}
 #navBarOverlay {
-    z-index:10;position:absolute;top:0;left:0;background-color:red;
+    z-index:10;position:absolute;top:0;left:0;
 }
 /*************************************************
 ** End navbar CSS
@@ -98,33 +123,21 @@ h2 {
 
 
 /*************************************************
-** Start Login dialog CSS
+** Start Login Menu CSS
 *************************************************/
-#loginDialog {
-    border-left: 1px solid #aaaaaa;border-bottom: 1px solid #aaaaaa;border-right: 1px solid #aaaaaa;border-top:1px solid #aaaaaa;
-    list-style: none;
-    background-color:#FFF;
-    position: absolute; 
-    margin: 0; padding:0;
-    display: none;
-    overflow: hidden;
-    border-bottom-left-radius: 4px 4px;border-bottom-right-radius: 4px 4px;-moz-border-radius:0px 0px 4px 4px;
-    z-index: 100;width:225px;
+#navbarLogin #login {
+    display:block;border-left:4px solid #008000;text-align:left;
 }
 
-#loginDialog #login {
-    border-left:4px solid #008000;padding:0 5px;
-}
-
-#loginDialog .header {
+#navbarLogin .header {
     color:#008000;font-size:14px;font-weight:bold;padding:5px 0;
 }
 
-#loginDialog label {
+#navbarLogin label {
     color:#666;display:block;padding-top:5px;
 }
 
-#loginDialog input {
+#navbarLogin input {
     
 }
 
