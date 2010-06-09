@@ -2,6 +2,7 @@ package openecho
 
 import openecho.User
 import openecho.Role
+import com.megatome.grails.RecaptchaService
 
 /**
  * User controller.
@@ -9,6 +10,7 @@ import openecho.Role
 class UserController {
 
   def authenticateService
+  RecaptchaService recaptchaService
 
   // the delete, save and update actions only accept POST requests
   static Map allowedMethods = [delete: 'POST', save: 'POST', update: 'POST']
@@ -23,6 +25,34 @@ class UserController {
     }
     [personList: User.list(params)]
   }
+
+
+    def register = {
+        log.debug("Enter UserController.register(" + params.toString() + ")")
+        def person = new User()
+        params.init = true;
+        person.properties = params
+        if(params.passwd) {
+            person.passwd = authenticateService.encodePassword(params.passwd)
+        }
+        
+        def recaptchaOK = true
+        def recaptchaVerify = recaptchaService.verifyAnswer(session, request.getRemoteAddr(), params)
+        log.debug("Recaptcha Verify:" + recaptchaVerify)
+        if(!person.hasErrors() && recaptchaVerify && person.save()) {
+            recaptchaService.cleanUp(session)
+            addRoles(person)
+            redirect action: show, id: person.id
+        }
+        if (!recaptchaVerify) {
+            recaptchaService.cleanUp(session)
+            recaptchaOK = false
+            render view: 'register', model: [authorityList: Role.list(), person: person]
+        } else {
+            render view: 'register', model: [authorityList: Role.list(), person: person]
+        }
+    }
+
 
   def show = {
     def person = User.get(params.id)
@@ -135,23 +165,26 @@ class UserController {
       render view: 'create', model: [authorityList: Role.list(), person: person]
     }
   }
+//
+//  def register = {
+//      [person: new User(params)]
+//  }
+//
+// def register_save = {
+//    def person = new User()
+//    person.properties = params
+//    person.passwd = authenticateService.encodePassword(params.passwd)
+//    if (person.save()) {
+//      addRoles(person)
+//      redirect action: show, id: person.id
+//    }
+//    else {
+//      render view: 'register', model: [authorityList: Role.list(), person: person]
+//    }
+//  }
 
-  def register = {
-      [person: new User(params)]
-  }
 
- def register_save = {
-    def person = new User()
-    person.properties = params
-    person.passwd = authenticateService.encodePassword(params.passwd)
-    if (person.save()) {
-      addRoles(person)
-      redirect action: show, id: person.id
-    }
-    else {
-      render view: 'register', model: [authorityList: Role.list(), person: person]
-    }
-  }
+   
 
   private void addRoles(person) {
     for (String key in params.keySet()) {
