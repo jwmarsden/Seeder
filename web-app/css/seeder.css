@@ -163,14 +163,27 @@ div.errors {
 #navbar .subnav li {
     display:block;border-left:4px solid #008000;text-align:left;
 }
+#navbar .subnav a {
+    padding-bottom:5px;padding-top:5px;padding-left:18px;padding-right:5px;
+}
+#navbar .subnav .hoverOption {
+    background-color:#CCC;
+}
 #navBarOverlay {
     z-index:10;position:absolute;top:0;left:0;
 }
+
+
 /*************************************************
 ** End navbar CSS
 *************************************************/
 
 
+
+
+form.loginForm {
+    margin:0 2px;padding:3px 2px;
+}
 
 /*************************************************
 ** Start Login Menu CSS

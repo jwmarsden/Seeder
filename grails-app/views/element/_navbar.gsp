@@ -5,7 +5,7 @@
     <div class="subnav">
       <ul>
         <g:each var="c" in="${grailsApplication.controllerClasses}">
-        <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
+        <li class="option controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
         </g:each>
       </ul>
     </div>
@@ -24,30 +24,34 @@
             <!--<g:if test='${flash.message}'>
               <div class='login_message'>${flash.message}</div>
             </g:if>-->
-            <div class='header'>Use your Seeder Account</div>
-            <form action='${request.contextPath}/j_spring_security_check' method='POST' id='ajaxLoginForm' name='ajaxLoginForm' class='cssform'>
-              <p>
-                <label for='j_username'>Username</label>
-                <input type='text' class='text_' name='j_username' id='j_username' value='${request.remoteUser}' />
-              </p>
-              <p>
-                <label for='j_password'>Password</label>
-                <input type='password' class='text_' name='j_password' id='j_password' />
-              </p>
-              <p>
-                <label for='remember_me'>Remember me</label>
-                <input type='checkbox' class='chk' name='_spring_security_remember_me' id='remember_me'
-              <g:if test='${hasCookie}'>checked='checked'</g:if> />
-              </p>
-              <p class="buttons">
-                <a href='javascript:void(0)' onclick='authAjax(); return false;'>Login</a>
-              </p>
+
+            <form action='${request.contextPath}/j_spring_security_check' method='POST' id='ajaxLoginForm' name='ajaxLoginForm' class='slim loginForm'>
+              <fieldset class="userInformation rc">
+                <legend>Seeder Account!</legend>
+                <p>
+                  <label for='j_username'>Username</label>
+                  <input type='text' class='text_' name='j_username' id='j_username' value='${request.remoteUser}' />
+                </p>
+                <p>
+                  <label for='j_password'>Password</label>
+                  <input type='password' class='text_' name='j_password' id='j_password' />
+                </p>
+                <p>
+                  <label for='remember_me'>Remember me</label>
+                  <input type='checkbox' class='chk' name='_spring_security_remember_me' id='remember_me'
+                  <g:if test='${hasCookie}'>checked='checked'</g:if> />
+                  </p>
+                <div class="buttons">
+                  <span class="button"><button id="ajaxLogin" class="submit" type="submit">Login!</button></span>
+                </div>
+              </fieldset>
             </form>
+            
           </div>
           <div class='inner'>
-            <div class='header'>Use your OpenID</div>
+            <div class='header'>OpenID</div>
             <p>Comming Soon</p>
-            <form action='${postUrl}' method='POST' id='loginForm' class='cssform' style="display:none">
+            <form action='${postUrl}' method='POST' id='loginForm' class='loginForm' style="display:none">
               <p>
                 <label for='j_username'>OpenID</label>
                 <input type='text' class='text_' name='j_username' />
@@ -155,6 +159,7 @@ var navbar = {
   searchMenuHelper: {
     show: function(element) {
       $.log($.stringFormat('Show Element: {0}',[element['id']]),10);
+      
       $(element).fadeIn().show();
       if(element.helper.element) {
         $(element.helper.element).addClass("navbar_selected");
@@ -264,6 +269,17 @@ $(document).ready(function() {
     $("#navbar li.topnav").children(":first-child").click(
     function() {
       navbar.onClick($(this).parent().get(0));
+    });
+
+  /************************************
+  ** Main Sub Navbar Events
+  ************************************/
+  $("#navbar .option").hover(
+    function () {
+      $(this).addClass("hoverOption");
+    },
+    function () {
+      $(this).removeClass("hoverOption");
     });
 
   /************************************

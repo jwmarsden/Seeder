@@ -12,7 +12,11 @@
   <g:layoutHead />
   <jq:jquery>
     $(document).ready(function() {
-
+      /************************************
+      ** General Input Field Events
+      ************************************/
+      $("input[type=\"text\"], textarea").hover(function () {$(this).addClass("hoverInput");},function () {$(this).removeClass("hoverInput");});
+      $("input[type=\"text\"], textarea").focus(function() {$(this).addClass("activeInput").removeClass("idle");}).blur(function(){$(this).removeClass("activeInput").addClass("idle");});
     });
   </jq:jquery>
 </head>
@@ -30,7 +34,7 @@
         <div class="rc" style="border:solid 1px #AAA;width:190px;">
           <div style="border-right:solid 4px #008000;min-height:160px;padding:5px">
             <div class="rc" style="border:solid 1px #AAA">
-              stuff goes here!
+              A seed is an idea or a concept that when introduced causes a much larger effect.
             </div>
             <div class="rc" style="margin-top:5px;border:solid 1px #AAA;overflow:hidden;text-align:right">
               <img src="<g:createLinkTo dir='images' file='skin/tree.png'/>" alt="tree"/>
