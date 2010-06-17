@@ -32,11 +32,11 @@
           <div class ="${hasErrors(bean:person,field:'username','error')}"> 
                   <label for="username">User Name</label><input type="text" id="username" name="username" value="${person.username?.encodeAsHTML()}"/>
           </div> 
-          <div class ="${hasErrors(bean:person,field:'password','error')}">
-                  <label for="password">Password</label><input type="password" id="passwd" name="passwd" value="${person.passwd?.encodeAsHTML()}"/>
+          <div class ="${hasErrors(bean:person,field:'passwd','error')}">
+                  <label for="password">Password</label><input type="password" id="pass" name="pass" value="${person.pass?.encodeAsHTML()}"/>
           </div> 
-          <div class ="${hasErrors(bean:person,field:'password','error')}">
-                  <label for="password2">Retype Password</label><input type="password" id="passwd2" name="passwd2" value="${person.passwd?.encodeAsHTML()}"/>
+          <div class ="${hasErrors(bean:person,field:'passwd','error')}">
+                  <label for="passVerify">Retype Password</label><input type="password" id="passVerify" name="passVerify" value="${person.passVerify?.encodeAsHTML()}"/>
           </div>
           <div class ="${hasErrors(bean:person,field:'email','error')}"> 
                   <label for="password2">Email Address</label><input type="text" id="email" name="email" value="${person.email?.encodeAsHTML()}"/>
@@ -47,9 +47,10 @@
               <recaptcha:recaptcha theme="white"/>
             </recaptcha:ifEnabled>
           </div>
-        <div class="buttons">
-          <span class="button"><button id="submitRegistration" class="submit" type="submit">Create My Account!</button></span>
-        </div>
+          <div class="clear"></div>
+          <div class="buttons">
+            <span class="button"><button id="submitRegistration" class="submit" type="submit">Create My Account!</button></span>
+          </div>
         </fieldset>
         </div>
       </g:form>

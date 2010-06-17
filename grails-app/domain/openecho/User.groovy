@@ -9,7 +9,7 @@ class User {
   static hasMany = [ profiles : Profile, authorities: Role]
   static belongsTo = [ Profile, Role ]
 
-  static transients = ['pass']
+  static transients = ['pass','passVerify']
 
   static mapping = {
     profiles lazy:false
@@ -30,7 +30,8 @@ class User {
   String description = ''
 
   /** plain password to create a MD5 password */
-  String pass = '[$blazr]/'
+  String pass
+  String passVerify
 
   String type="LOCAL"
   
@@ -40,7 +41,7 @@ class User {
   static constraints = {
     username(blank: false, unique: true)
     passwd(nullable: false, blank: false)
-    email(nullable: false, blank: false)
+    email(nullable: false, blank: false, email: true)
     enabled()
     type(nullable: false, blank: false, inList:["LOCAL","OPEN_ID"])
   }

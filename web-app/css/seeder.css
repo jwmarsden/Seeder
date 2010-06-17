@@ -19,11 +19,21 @@ input, select, textarea {
     padding: 2px 2px;
 }
 
-input:focus, select:focus, textarea:focus {
-    border: 1px solid #b2d1ff;
-    background-color: #fff;
+input.hoverInput, select.hoverInput, textarea.hoverInput {
+    border: 1px solid #ddd;
 }
 
+input.activeInput, select.activeInput, textarea.activeInput {
+    border: 1px solid #008000;
+}
+
+div.error input, div.error select, div.error textarea {
+    border:1px solid #cd6b6b;background-color:#ffeaea;
+}
+
+input.activeInput, select.activeInput, textarea.activeInput {
+    background-color: #fff;
+}
 
 
 
@@ -304,4 +314,9 @@ form.loginForm {
 
 #biography p {
     padding-bottom:5px;
+}
+
+
+.clear {
+    clear:both;
 }

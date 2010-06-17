@@ -37,15 +37,23 @@ class UserController {
             def recaptchaVerify = recaptchaService.verifyAnswer(session, request.getRemoteAddr(), params)
             if (!recaptchaVerify) {
                 render view: 'register', model: [authorityList: Role.list(), person: person]
-            } else {
-                if(params.passwd && params.passwd==params.passwd2) {
-                    person.passwd = authenticateService.encodePassword(params.passwd)
+            } else {                
+                if(params.pass && params.passVerify && params.pass==params.passVerify) {
+                    person.passwd = authenticateService.encodePassword(params.pass)
                 } else {
+                    person.validate()
                     params.passwd = null
-                    params.passwd2 = null
                     recaptchaService.cleanUp(session)
+                    person.errors.rejectValue(
+                        'passwd',
+                        'seeder.registration.password.mismatch',
+                        null,
+                        'Password entries must match. Please provide the same password twice.'
+                    )
                     render view: 'register', model: [authorityList: Role.list(), person: person]
+                    return
                 }
+                
                 addRoles(person)
                 if(person.save()) {
                     redirect action: show, id: person.id
