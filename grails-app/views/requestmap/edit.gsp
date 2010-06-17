@@ -1,5 +1,5 @@
 <head>
-	<meta name="layout" content="main" />
+	<meta name="layout" content="wide" />
 	<title>Edit Requestmap</title>
 </head>
 

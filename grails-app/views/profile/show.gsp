@@ -94,8 +94,5 @@
 
 </div>
 <div style="clear:both;"></div>
-<div class="rc shaded" style="margin-top:2px;min-height:50px">
-
-</div>
 </body>
 </html>
