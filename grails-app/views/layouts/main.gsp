@@ -21,7 +21,7 @@
   </jq:jquery>
 </head>
 <body> 
-  <div style="width: 800px; margin:0 auto">
+  <div style="width: 1000px; margin:0 auto">
     <div id="header" style="margin-bottom:10px; padding:0; float:left">
       <img src="<g:createLinkTo dir='images' file='seeder_logo.png'/>" alt="logo"/>
     </div>
@@ -31,7 +31,7 @@
         <g:layoutBody />
       </div>
       <div style="float:right">
-        <div class="rc" style="border:solid 1px #AAA;width:190px;">
+        <div class="rc" style="border:solid 1px #AAA;width:280px;">
           <div style="border-right:solid 4px #008000;min-height:160px;padding:5px">
             <div class="rc" style="border:solid 1px #AAA;padding:5px">
               <em>Seed</em>: a novel idea or a concept that shared with the community.
@@ -69,9 +69,7 @@
       </div>
     </div>
   </div>
-<g:render template='/element/overlay'/>
 
-
-
+  
 </body>
 </html>
