@@ -9,7 +9,7 @@
     </div>
     <div class="block">
       <div>
-        <h1></h1>
+        <g:render template='/elements/controllerList'/>
       </div>
     </div>
     <div class="block last">
