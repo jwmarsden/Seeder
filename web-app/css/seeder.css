@@ -1,6 +1,6 @@
 
 body {
-    background: #fff;color: #333;font: 11px verdana, arial, helvetica, sans-serif;min-height:300px;
+    background: #fff;color: #333;font: 12px arial, verdana, helvetica, sans-serif;min-height:300px;
 }
 h1, h2, h3 {
    color:#008000;font-weight:bold;margin-bottom:5px;
@@ -8,9 +8,24 @@ h1, h2, h3 {
 h1 { font-size:18px; }
 h2 { font-size:16px; }
 h3 { font-size:14px; }
+p {
+   font-size:14px;padding:5px 0;
+}
 a:link, a:visited, a:hover {
     text-decoration: none;
 }
+a:link {
+    color:#660066;
+}
+a:visited {
+    color:#660066;
+}
+a:hover {
+    color:#006000;
+}
+ol {list-style-type:decimal-leading-zero;font-size:14px;margin-left:20px;padding-left:20px;padding-right:20px;padding-top:5px;padding-bottom:5px}
+ul.square {list-style-type:square;font-size:14px;margin-left:20px;padding-left:20px;padding-right:20px;padding-top:5px;padding-bottom:5px}
+ol li, ul.square li {padding:2px 0}
 em {
   font-weight:bold;
 }
@@ -75,6 +90,22 @@ fieldset > div.buttons {
 }
 
 
+div.list {
+    border:1px solid #ccc;
+    border-bottom-left-radius: 4px 4px;border-bottom-right-radius: 4px 4px;border-top-left-radius: 4px 4px;border-top-right-radius: 4px 4px;-moz-border-radius:4px 4px 4px 4px;
+}
+div.list table {
+    border-left:4px solid #008000;padding:5px;
+}
+div.list table thead tr th {
+    background-color:#eee;color:#008000;font-weight:bold;text-align:center;padding:6px 10px;border-left:2px solid #fefefe;border-right:2px solid #fefefe;
+}
+div.list table tbody tr.odd td {
+    background-color:#fefefe;padding:4px 10px;border-left:2px solid #eee;border-right:2px solid #eee;
+}
+div.list table tbody tr.even td {
+    background-color:#eee;padding:4px 10px;border-left:2px solid #fefefe;border-right:2px solid #fefefe;
+}
 
 div.info {
     background-image:url(../images/icon/puzzle.png); background-position:+4px +4px; background-repeat:no-repeat;

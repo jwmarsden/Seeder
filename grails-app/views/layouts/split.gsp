@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
 /**
-Wide Layout
+Split Layout
 **/
 %>
 <html>
@@ -15,11 +15,11 @@ Wide Layout
       <g:render template='/layouts/navbar'/>
 
       <div style="clear:both;">
-        <div style="float:left;width:600px">
+        <div style="float:left;width:490px">
           <g:layoutBody />
         </div>
         <div style="float:right">
-          <div class="rc" style="border:solid 1px #AAA;width:380px;">
+          <div class="rc" style="border:solid 1px #AAA;width:490px;">
             <div style="border-right:solid 4px #008000;min-height:160px;padding:5px">
               <g:render template='/elements/definition'/>
               <g:render template='/elements/systemInfo'/>

@@ -17,18 +17,19 @@
         <div>
         <fieldset class="userInformation rc">
           <legend>Login Details</legend>
-          <g:hasErrors bean="${person}">
-            <div class="errors">
-              <g:renderErrors bean="${person}" as="list" />
-            </div>
-          </g:hasErrors>
-          <recaptcha:ifFailed>
-            <div class="errors">
-              <ul>
-                <li>There was an error with the two words entered into the captcha. Please try again.</li>
-              </ul>
-            </div>
-          </recaptcha:ifFailed>
+            <g:hasErrors bean="${person}">
+              <div class="errors" style="margin-bottom:5px">
+                <g:renderErrors bean="${person}" as="list" />
+              </div>
+            </g:hasErrors>
+            <recaptcha:ifFailed>
+              <div class="errors" style="margin-bottom:5px">
+                <ul>
+                  <li>There was an error with the two words entered into the captcha. Please try again.</li>
+                </ul>
+              </div>
+            </recaptcha:ifFailed>
+          
           <div class ="${hasErrors(bean:person,field:'username','error')}"> 
                   <label for="username">User Name</label><input type="text" id="username" name="username" value="${person.username?.encodeAsHTML()}"/>
           </div> 

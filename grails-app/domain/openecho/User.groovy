@@ -3,50 +3,57 @@ package openecho
 import openecho.Role
 
 /**
- * User domain class.
- */
+* User domain class.
+*/
 class User {
-  static hasMany = [ profiles : Profile, authorities: Role]
-  static belongsTo = [ Profile, Role ]
+    static hasMany = [ profiles : Profile, authorities: Role]
+    static belongsTo = [ Profile, Role ]
 
-  static transients = ['pass','passVerify']
+    static transients = ['pass','passVerify']
 
-  static mapping = {
-    profiles lazy:false
-  }
-  
-  /** Username */
-  String username
-  
-  /** MD5 Password */
-  String passwd
-  /** enabled */
-  boolean enabled
+    static mapping = {
+        profiles lazy:false
+    }
 
-  String email
-  boolean emailShow
+    /** Username */
+    String username
 
-  /** description */
-  String description = ''
+    /** MD5 Password */
+    String passwd
+    /** enabled */
+    boolean enabled
 
-  /** plain password to create a MD5 password */
-  String pass
-  String passVerify
+    String email
+    boolean emailShow
+    boolean requiresVerificationEmail
 
-  String type="LOCAL"
-  
-  Date dateCreated
-  Date lastUpdated
+    /** description */
+    String description = ''
 
-  static constraints = {
-    username(blank: false, unique: true)
-    passwd(nullable: false, blank: false)
-    email(nullable: false, blank: false, email: true)
-    enabled()
-    type(nullable: false, blank: false, inList:["LOCAL","OPEN_ID"])
-  }
+    /** plain password to create a MD5 password */
+    String pass
+    String passVerify
 
-  String toString() {
-    "User for ${username} (${id})"
-  }
+    String type="LOCAL"
+
+    String uuid
+
+    Date dateCreated
+    Date lastUpdated
+
+    static constraints = {
+        username(blank: false, unique: true)
+        passwd(nullable: false, blank: false)
+        email(nullable: false, blank: false, email: true)
+        type(nullable: false, blank: false, inList:["LOCAL","OPEN_ID"])
+        uuid(nullable: true, blank: true)
+    }
+
+    transient beforeInsert = {
+        uuid = java.util.UUID.randomUUID().toString()
+    }
+
+    String toString() {
+        "User for ${username} (${id})"
+    }
 }

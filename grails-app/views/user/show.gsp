@@ -50,6 +50,11 @@
 					<td valign="top" class="value">${person.emailShow}</td>
 				</tr>
 
+                                <tr class="prop">
+					<td valign="top" class="name">Uuid:</td>
+					<td valign="top" class="value">${person.uuid}</td>
+				</tr>
+
 				<tr class="prop">
 					<td valign="top" class="name">Roles:</td>
 					<td valign="top" class="value">

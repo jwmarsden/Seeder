@@ -1,7 +1,7 @@
 <div class="subPannel tree">
   <h3>Application Status</h3>
   <ul style="margin-bottom:5px">
-          <li><em>App version:</em> <g:meta name="app.version"></g:meta></li>
+          <li><em>Seeder version:</em> <g:meta name="app.version"></g:meta></li>
           <li><em>Grails version:</em> <g:meta name="app.grails.version"></g:meta></li>
           <li><em>JVM version:</em> ${System.getProperty('java.version')}</li>
           <li><em>Controllers:</em> ${grailsApplication.controllerClasses.size()}</li>

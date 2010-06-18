@@ -3,7 +3,6 @@ package openecho
 import openecho.User
 import openecho.Role
 import com.megatome.grails.RecaptchaService
-
 /**
  * User controller.
  */
@@ -11,7 +10,7 @@ class UserController {
 
     def authenticateService
     RecaptchaService recaptchaService
-
+    
     // the delete, save and update actions only accept POST requests
     static Map allowedMethods = [delete: 'POST', save: 'POST', update: 'POST']
 
@@ -55,6 +54,7 @@ class UserController {
                 }
                 
                 addRoles(person)
+                person.requiresVerificationEmail = true
                 if(person.save()) {
                     redirect action: show, id: person.id
                 } else {

@@ -4,7 +4,6 @@
 <g:javascript library="jquery" />
 <g:javascript library="seeder" />
 <g:javascript library="application" />
-<jqui:resources />
 <g:layoutHead />
 <jq:jquery>
   $(document).ready(function() {
