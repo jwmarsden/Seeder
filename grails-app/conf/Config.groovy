@@ -85,6 +85,7 @@ log4j = {
     warn   'org.mortbay.log'
 
     debug  'grails.app.controller'
+            'grails.app.task'
 }
 
 

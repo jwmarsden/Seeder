@@ -67,9 +67,16 @@ class UserController {
         }
     }
 
-    def check_username = {
-        nocache(response)
-        render '{\"success\": true}'
+    def verify = {
+        log.debug("Enter UserController.verify(" + request.getMethod() + ", " + params.toString() + ")")
+        def user = User.findByUsernameAndUuid(params.username,params.uuid);
+        if(user) {
+            user.enabled = true;
+            user.save()
+            render "User Registered"
+        } else {
+            redirect "/"
+        }
     }
 
 

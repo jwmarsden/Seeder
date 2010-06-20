@@ -101,13 +101,13 @@ div.list table {
     border-left:4px solid #008000;padding:5px;
 }
 div.list table thead tr th {
-    background-color:#eee;color:#008000;font-weight:bold;text-align:center;padding:6px 10px;border-left:2px solid #fefefe;border-right:2px solid #fefefe;
+    background-color:#eee;color:#008000;font-weight:bold;text-align:center;padding:6px 10px;border:1px solid #fefefe;
 }
 div.list table tbody tr.odd td {
-    background-color:#fefefe;padding:4px 10px;border-left:2px solid #eee;border-right:2px solid #eee;
+    background-color:#fefefe;padding:4px 10px;border: 1px solid #eee;
 }
 div.list table tbody tr.even td {
-    background-color:#eee;padding:4px 10px;border-left:2px solid #fefefe;border-right:2px solid #fefefe;
+    background-color:#f5f5f5;padding:4px 10px;border: 1px solid #eee;
 }
 
 div.info {
