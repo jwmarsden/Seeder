@@ -79,6 +79,9 @@ class UserController {
         }
     }
 
+    def dashboard = {
+        render "Dashboard"
+    }
 
     def show = {
         def person = User.get(params.id)

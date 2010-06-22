@@ -1,5 +1,12 @@
 <ul id="navbar">
-  <li id="navbarHome" class="topnav"><g:link controller="user" action="register" class="register">${message(code: 'seeder.button.register.label')}</g:link></li>
+  <li id="navbarHome" class="topnav">
+    <g:ifAnyGranted role="ROLE_USER,ROLE_ADMIN">
+      <g:link controller="user" action="dashboard" class="dashboard">${message(code: 'seeder.button.dashboard.label')}</g:link>
+    </g:ifAnyGranted>
+    <g:isNotLoggedIn>
+      <g:link controller="user" action="register" class="register">${message(code: 'seeder.button.register.label')}</g:link>
+    </g:isNotLoggedIn>
+  </li>
 
   <li id="navbarGo" class="topnav"><span class="go">${message(code: 'seeder.button.go.label')}</span>
     <div class="subnav">
@@ -16,56 +23,60 @@
       Search Options Coming!
     </div>
   </li>
+  <li id="navbarLogin" class="topnav">
+    <g:ifAnyGranted role="ROLE_USER,ROLE_ADMIN">
+    <g:link controller="logout" class="logout">${message(code: 'seeder.button.logout.label')}</g:link>
+    </g:ifAnyGranted>
 
-  <li id="navbarLogin" class="topnav"><span class="login">${message(code: 'seeder.button.login.label')}</span>
-      <div class="subnav">
-        <div id='login'>
-          <div class='inner'>
-            <!--<g:if test='${flash.message}'>
-              <div class='login_message'>${flash.message}</div>
-            </g:if>-->
+    <g:ifNotGranted role="ROLE_USER">
+    <span class="login">${message(code: 'seeder.button.login.label')}</span>
+        <div class="subnav">
+          <div id='login'>
+            <div class='inner'>
+              <!--<g:if test='${flash.message}'>
+                <div class='login_message'>${flash.message}</div>
+              </g:if>-->
 
-            <form action='${request.contextPath}/j_spring_security_check' method='POST' id='ajaxLoginForm' name='ajaxLoginForm' class='slim loginForm'>
-              <fieldset class="userInformation rc">
-                <legend>Seeder Account!</legend>
-                <p>
-                  <label for='j_username'>Username</label>
-                  <input type='text' class='text_' name='j_username' id='j_username' value='${request.remoteUser}' />
-                </p>
-                <p>
-                  <label for='j_password'>Password</label>
-                  <input type='password' class='text_' name='j_password' id='j_password' />
-                </p>
-                <p>
-                  <label for='remember_me'>Remember me</label>
-                  <input type='checkbox' class='chk' name='_spring_security_remember_me' id='remember_me'
-                  <g:if test='${hasCookie}'>checked='checked'</g:if> />
+              <form action='${request.contextPath}/j_spring_security_check' method='POST' id='ajaxLoginForm' name='ajaxLoginForm' class='slim loginForm'>
+                <fieldset class="userInformation rc">
+                  <legend>Seeder Account!</legend>
+                  <p>
+                    <label for='j_username'>Username</label>
+                    <input type='text' class='text_' name='j_username' id='j_username' value='${request.remoteUser}' />
                   </p>
-                <div class="buttons">
-                  <span class="button"><button id="ajaxLogin" class="submit" type="submit">Login!</button></span>
-                </div>
-              </fieldset>
-            </form>
-            
-          </div>
-          <div class='inner'>
-            <div class='header'>OpenID</div>
-            <p>Comming Soon</p>
-            <form action='${postUrl}' method='POST' id='loginForm' class='loginForm' style="display:none">
-              <p>
-                <label for='j_username'>OpenID</label>
-                <input type='text' class='text_' name='j_username' />
-              </p>
-              <p>
-                <input type='submit' value='Login' />
-              </p>
-            </form>
-          </div>
-          <div class="details">
-            Logged In.
+                  <p>
+                    <label for='j_password'>Password</label>
+                    <input type='password' class='text_' name='j_password' id='j_password' />
+                  </p>
+                  <p>
+                    <label for='remember_me'>Remember me</label>
+                    <input type='checkbox' class='chk' name='_spring_security_remember_me' id='remember_me'
+                    <g:if test='${hasCookie}'>checked='checked'</g:if> />
+                    </p>
+                  <div class="buttons">
+                    <span class="button"><button id="ajaxLogin" class="submit" type="submit">Login!</button></span>
+                  </div>
+                </fieldset>
+              </form>
+
+            </div>
+            <div class='inner'>
+              <div class='header'>OpenID</div>
+              <p>Comming Soon</p>
+              <form action='${postUrl}' method='POST' id='loginForm' class='loginForm' style="display:none">
+                <p>
+                  <label for='j_username'>OpenID</label>
+                  <input type='text' class='text_' name='j_username' />
+                </p>
+                <p>
+                  <input type='submit' value='Login' />
+                </p>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+
+    </g:ifNotGranted>
   </li>
 </ul>
 <div id="navbarOverlay"></div>

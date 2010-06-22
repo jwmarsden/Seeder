@@ -3,7 +3,7 @@ class BootStrap {
     
     def init = { servletContext ->
         // Create Roles
-        def everyoneRole = new openecho.Role(authority:"ROLE_EVERYONE", description:"Role for Users").save()
+        def everyoneRole = new openecho.Role(authority:"ROLE_USER", description:"Role for Users").save()
         def administratorRole = new openecho.Role(authority:"ROLE_ADMIN", description:"Role for Administrators").save()
         // Create Users
         def jmarsdenUser = new openecho.User(username: "jmarsden", passwd: authenticateService.encodePassword("rah"), email: "j.w.marsden@gmail.com", enabled: true)

@@ -4,13 +4,14 @@
 </head>
 <body>
       <div class="info"><g:message code="seeder.message.register" /></div>
-      <g:if test="${flash.message}">
-        <div class="message">${flash.message}</div>
-      </g:if>
+
       <form action='${postUrl}' method='POST' id='loginForm' class='form rc'>
         <div>
         <fieldset class="userInformation rc">
           <legend>Login Details</legend>
+            <g:if test="${flash.message}">
+              <div class="message">${flash.message}</div>
+            </g:if>
             <g:hasErrors bean="${person}">
               <div class="errors" style="margin-bottom:5px">
                 <g:renderErrors bean="${person}" as="list" />
