@@ -80,7 +80,7 @@ class UserController {
     }
 
     def dashboard = {
-        render "Dashboard"
+        render view: 'dashboard'
     }
 
     def show = {
