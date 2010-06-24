@@ -11,10 +11,16 @@
   <li id="navbarGo" class="topnav"><span class="go">${message(code: 'seeder.button.go.label')}</span>
     <div class="subnav">
       <ul>
+        <li class="option"><g:link controller="profile">Profiles</g:link></li>
+      </ul>
+      <g:ifAnyGranted role="ROLE_ADMIN">
+      <h3>All Controllers</h3>
+      <ul>
         <g:each var="c" in="${grailsApplication.controllerClasses}">
         <li class="option controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
         </g:each>
       </ul>
+      </g:ifAnyGranted>
     </div>
   </li>
 
@@ -25,11 +31,14 @@
   </li>
   <li id="navbarLogin" class="topnav">
     <g:ifAnyGranted role="ROLE_USER,ROLE_ADMIN">
-    <g:link controller="logout" class="logout">${message(code: 'seeder.button.logout.label')}</g:link>
+      <span class="profile" style="text-align:left;overflow:hidden;padding-right:5px;width:138px;padding-left:22px;background:url(/seeder.git/images/icon/puzzle.png) center left no-repeat;">jmarsden</span>
+      <div class="subnav">
+        <g:link controller="logout" class="logout">${message(code: 'seeder.button.logout.label')}</g:link>
+      </div>
     </g:ifAnyGranted>
 
     <g:ifNotGranted role="ROLE_USER">
-    <span class="login">${message(code: 'seeder.button.login.label')}</span>
+    <span class="login" style="width:138px;">${message(code: 'seeder.button.login.label')}</span>
         <div class="subnav">
           <div id='login'>
             <div class='inner'>
